@@ -7,45 +7,57 @@
   <meta name="description" content="Tu guía para resolver dudas sobre SGP, ARL, documentos y seguimiento de prácticas en la CUN." />
   <meta name="theme-color" content="#3B81F6" />
 
-  <!-- Open Graph -->
+  <!-- Canonical + OpenGraph + Twitter -->
+  <link rel="canonical" href="https://juliancarrenocun.github.io/otilia-chat/" />
   <meta property="og:title" content="Doña Otilia – Asistente de Prácticas CUN" />
   <meta property="og:description" content="Resuelve tus dudas de prácticas: SGP, ARL, documentos, seguimiento y cierre." />
-  <meta property="og:image" content="assets/otilia-512.png" />
   <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://juliancarrenocun.github.io/otilia-chat/" />
+  <meta property="og:image" content="assets/otilia-512.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Doña Otilia – Asistente de Prácticas CUN" />
+  <meta name="twitter:description" content="Resuelve tus dudas de prácticas: SGP, ARL, documentos, seguimiento y cierre." />
+  <meta name="twitter:image" content="https://juliancarrenocun.github.io/otilia-chat/assets/otilia-512.png" />
 
-  <!-- Icons & PWA -->
-  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png" />
+  <!-- Icons / PWA (usando TUS nombres de archivos) -->
   <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png" />
-  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+  <link rel="icon" type="image/x-icon" sizes="32x32" href="assets/favicon-32.ico" />
+  <link rel="icon" type="image/png" sizes="96x96" href="assets/favicon-96x96.png" />
+  <link rel="manifest" href="assets/site.webmanifest" />
 
-  <!-- Fuente del sistema para carga rápida -->
+  <!-- Estilos base -->
   <style>
     :root{
-      --cun-blue:#3B81F6;         /* primario del chat */
-      --cun-green:#47A447;        /* acento institucional CUN */
-      --bg:#0B1426;               /* fondo header (oscuro clean) */
-      --text:#0F172A;             /* texto principal */
-      --muted:#556070;            /* texto secundario */
+      --cun-blue:#3B81F6;
+      --cun-green:#47A447;
+      --bg:#0b1020;
+      --text:#0F172A;
+      --muted:#556070;
       --radius:16px;
       --shadow:0 8px 30px rgba(2,6,23,.08);
     }
     *{box-sizing:border-box}
     html,body{margin:0}
     body{
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
+      font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif;
       color:var(--text);
       background:#fff;
       line-height:1.5;
       -webkit-font-smoothing:antialiased;
       text-rendering:optimizeLegibility;
+      padding-bottom:84px; /* deja aire para la burbuja del chat */
     }
-    /* Header ---------------------------------------------------*/
+    .sr-skip{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden}
+    .sr-skip:focus{left:16px;top:16px;width:auto;height:auto;background:#fff;padding:8px 12px;border-radius:8px;z-index:9999}
+
+    /* Hero */
     .hero{
       background: radial-gradient(1200px 500px at 70% -10%, rgba(71,164,71,.18), transparent 60%), var(--bg);
       color:#fff;
-      padding: clamp(32px, 5vw, 64px) 24px;
-      position:relative;
-      overflow:hidden;
+      padding:clamp(32px,5vw,64px) 24px;
     }
     .container{max-width:1080px;margin:0 auto}
     .brand{display:flex;align-items:center;gap:12px}
@@ -66,10 +78,10 @@
     .btn-ghost{background:#fff;color:var(--text)}
     .kbd{
       font:600 11px ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
-      background:#0B1426; color:#A5B4FC; padding:2px 6px; border-radius:6px;
-      border:1px solid rgba(255,255,255,.15)
+      background:#0B1426;color:#A5B4FC;padding:2px 6px;border-radius:6px;border:1px solid rgba(255,255,255,.15)
     }
-    /* Main -----------------------------------------------------*/
+
+    /* Main */
     main{padding:40px 24px}
     .card{
       border:1px solid #E6E9F2;border-radius:var(--radius);box-shadow:var(--shadow);
@@ -80,22 +92,26 @@
     h2{margin:0 0 12px;font-size:clamp(20px,2.4vw,28px)}
     ul{margin:0;padding-left:18px}
     li{margin:6px 0}
-    .note{
-      margin-top:14px;padding:12px;border-left:4px solid var(--cun-green);
-      background:#F4FBF6;color:#1E3A1E;border-radius:8px;
-    }
+    .note{margin-top:14px;padding:12px;border-left:4px solid var(--cun-green);background:#F4FBF6;color:#1E3A1E;border-radius:8px}
+    a{color:var(--cun-blue);text-decoration:none}
+    a:hover{text-decoration:underline}
     footer{padding:24px;color:var(--muted);text-align:center;border-top:1px solid #EEF2F7}
     .footer-links{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;margin-top:8px}
-    .footer-links a{color:var(--muted);text-decoration:none}
+    .footer-links a{color:var(--muted)}
     .footer-links a:hover{color:var(--cun-blue)}
+
+    /* Chat bubble (ajuste de capa por si se superpone a tooltips) */
+    .cb-dc-bubble { z-index: 9990 !important; }
   </style>
 </head>
 
 <body>
+  <a href="#contenido" class="sr-skip">Saltar al contenido</a>
+
   <header class="hero">
     <div class="container">
       <div class="brand">
-        <img src="assets/otilia-512.png" alt="Ícono Doña Otilia" />
+        <img src="assets/otilia-512.png" alt="Ícono Doña Otilia" loading="lazy" />
         <div>
           <div class="tag">🗨️ Asistente de Prácticas CUN</div>
           <h1>Doña Otilia – tu guía para las prácticas</h1>
@@ -103,14 +119,14 @@
           <div class="cta-row">
             <a class="btn btn-primary" href="https://bienestaru.cun.edu.co/practicas/" target="_blank" rel="noopener">Ir al SGP</a>
             <a class="btn btn-ghost" href="https://sites.google.com/cun.edu.co/practicascun/p%C3%A1gina-principal" target="_blank" rel="noopener">Portal de prácticas</a>
-            <span class="kbd">Esc ⎋</span>
+            <span class="kbd" title="Tip de teclado (decorativo)">Esc ⎋</span>
           </div>
         </div>
       </div>
     </div>
   </header>
 
-  <main class="container grid" aria-label="Contenido principal">
+  <main id="contenido" class="container grid" aria-label="Contenido principal">
     <section class="card">
       <h2>¿Qué puedes preguntarle?</h2>
       <ul>
@@ -122,7 +138,7 @@
       <div class="note">Consejo: ten a la mano tu correo institucional; lo vas a necesitar para acceder a formatos y al SGP.</div>
     </section>
 
-    <aside class="card" aria-label="Atajos">
+    <aside class="card" aria-label="Accesos rápidos">
       <h2>Accesos útiles</h2>
       <ul>
         <li><a href="https://bienestaru.cun.edu.co/practicas/" target="_blank" rel="noopener">Ingreso a SGP</a></li>
@@ -140,7 +156,7 @@
     </nav>
   </footer>
 
-  <!-- ====== CHATBASE (tu snippet oficial) ====== -->
+  <!-- Chatbase (tu script oficial) -->
   <script>
   (function(){
     if(!window.chatbase || window.chatbase("getState")!=="initialized"){
@@ -149,22 +165,29 @@
         window.chatbase.q.push(arguments)
       };
       window.chatbase=new Proxy(window.chatbase,{
-        get(target,prop){
-          if(prop==="q"){return target.q}
-          return(...args)=>target(prop,...args)
-        }
-      })
+        get(target,prop){ if(prop==="q"){return target.q} return(...args)=>target(prop,...args) }
+      });
     }
     const onLoad=function(){
-      const script=document.createElement("script");
-      script.src="https://www.chatbase.co/embed.min.js";
-      script.id="sLDgiXlWpHYwWJV6DdWvp";   /* <- tu ID embed */
-      script.domain="www.chatbase.co";
-      document.body.appendChild(script)
+      const s=document.createElement("script");
+      s.src="https://www.chatbase.co/embed.min.js";
+      s.id="sLDgiXlWpHYwWJV6DdWvp";  /* <-- tu ID de Chatbase */
+      s.domain="www.chatbase.co";
+      document.body.appendChild(s);
     };
     if(document.readyState==="complete"){onLoad()}
     else{window.addEventListener("load",onLoad)}
   })();
+  </script>
+
+  <!-- (Opcional) atajo de teclado para enfocar la burbuja del chat -->
+  <script>
+  document.addEventListener('keydown', (e)=>{
+    if(e.key.toLowerCase()==='escape'){
+      const bubble = document.querySelector('.cb-dc-bubble,[aria-label*="chat"],[class*="chat"]');
+      if(bubble){ bubble.scrollIntoView({behavior:'smooth', block:'center'}); }
+    }
+  });
   </script>
 </body>
 </html>
