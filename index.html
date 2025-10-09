@@ -1,168 +1,171 @@
 <!doctype html>
-<html lang="es">
+<html lang="es" dir="ltr">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Doña Otilia – Asistente de Prácticas CUN</title>
+  <meta name="description" content="Tu guía para resolver dudas sobre SGP, ARL, documentos y seguimiento de prácticas en la CUN." />
+  <meta name="theme-color" content="#3B81F6" />
 
-  <!-- Fuente institucional limpia -->
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <!-- Open Graph -->
+  <meta property="og:title" content="Doña Otilia – Asistente de Prácticas CUN" />
+  <meta property="og:description" content="Resuelve tus dudas de prácticas: SGP, ARL, documentos, seguimiento y cierre." />
+  <meta property="og:image" content="assets/otilia-512.png" />
+  <meta property="og:type" content="website" />
 
+  <!-- Icons & PWA -->
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png" />
+  <link rel="manifest" href="manifest.webmanifest" />
+
+  <!-- Fuente del sistema para carga rápida -->
   <style>
     :root{
-      /* Paleta CUN */
-      --green: #6DBE45;
-      --green-600:#4E8E32;
-      --green-100:#EAF7E3;
-      --blue:  #004B8D;
-      --blue-100:#DDEAFB;
-      --ink:   #1F2A37;
-      --muted: #667085;
-      --bg:    #ffffff;
-      --card:  #ffffff;
-      --shadow: 0 10px 30px rgba(16,24,40,.06);
-      --radius: 16px;
+      --cun-blue:#3B81F6;         /* primario del chat */
+      --cun-green:#47A447;        /* acento institucional CUN */
+      --bg:#0B1426;               /* fondo header (oscuro clean) */
+      --text:#0F172A;             /* texto principal */
+      --muted:#556070;            /* texto secundario */
+      --radius:16px;
+      --shadow:0 8px 30px rgba(2,6,23,.08);
     }
-
     *{box-sizing:border-box}
-    html,body{margin:0;background:var(--bg);color:var(--ink);font-family:Poppins,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial,sans-serif}
-
-    /* Header */
-    .topbar{
-      position:sticky;top:0;z-index:2;
-      background:var(--bg);
-      border-bottom:1px solid #EDF1F5;
+    html,body{margin:0}
+    body{
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
+      color:var(--text);
+      background:#fff;
+      line-height:1.5;
+      -webkit-font-smoothing:antialiased;
+      text-rendering:optimizeLegibility;
     }
-    .container{max-width:1100px;margin:auto;padding:20px}
-    .header{
-      display:flex;align-items:center;gap:16px;justify-content:space-between;
-      flex-wrap:wrap;
-    }
-    .brand{display:flex;align-items:center;gap:12px}
-    .brand img{height:28px}
-    h1{font-size:clamp(22px,2.2vw,28px);margin:0}
-    .subtitle{color:var(--muted);font-size:14px;margin-top:4px}
-
-    .cta-group{display:flex;gap:10px;flex-wrap:wrap}
-    .btn{
-      appearance:none;border:0;border-radius:999px;padding:12px 18px;
-      font-weight:600;cursor:pointer;transition:transform .06s ease,box-shadow .2s ease;
-      text-decoration:none;display:inline-flex;align-items:center;gap:8px
-    }
-    .btn:active{transform:translateY(1px)}
-    .btn-blue{background:var(--blue);color:#fff;box-shadow:0 8px 20px rgba(0,75,141,.25)}
-    .btn-green{background:var(--green);color:#0B2612;box-shadow:0 8px 20px rgba(109,190,69,.25)}
-
-    /* Hero */
+    /* Header ---------------------------------------------------*/
     .hero{
-      background:linear-gradient(135deg, var(--green) 0%, #A5D68B 100%);
-      padding:56px 0;
+      background: radial-gradient(1200px 500px at 70% -10%, rgba(71,164,71,.18), transparent 60%), var(--bg);
+      color:#fff;
+      padding: clamp(32px, 5vw, 64px) 24px;
+      position:relative;
+      overflow:hidden;
     }
-    .hero-inner{
-      display:grid;grid-template-columns:120px 1fr;gap:18px;align-items:center;
-      background:rgba(255,255,255,.6);
-      border-radius:var(--radius);backdrop-filter:saturate(140%) blur(2px);
-      padding:18px 20px;
+    .container{max-width:1080px;margin:0 auto}
+    .brand{display:flex;align-items:center;gap:12px}
+    .brand img{width:40px;height:40px;border-radius:50%;box-shadow:var(--shadow)}
+    .tag{display:inline-flex;align-items:center;gap:8px;padding:6px 10px;border-radius:999px;background:rgba(255,255,255,.1);backdrop-filter:saturate(140%);font-size:12px}
+    .hero h1{margin:14px 0 8px;font-size:clamp(24px,3.2vw,36px)}
+    .hero p{margin:0;color:#E6ECFF;max-width:64ch}
+    .cta-row{display:flex;gap:12px;margin-top:18px;flex-wrap:wrap}
+    .btn{
+      appearance:none;border:0;cursor:pointer;text-decoration:none;
+      display:inline-flex;align-items:center;gap:10px;
+      padding:12px 16px;border-radius:10px;font-weight:600;
+      box-shadow:var(--shadow);transition:transform .06s ease,filter .2s ease;
     }
-    .avatar{
-      width:120px;height:120px;border-radius:50%;
-      background:#fff url("img/otilia-icon.png") center/85% no-repeat;
-      box-shadow:var(--shadow);border:3px solid #fff;
+    .btn:hover{transform:translateY(-1px);filter:saturate(110%)}
+    .btn:active{transform:translateY(0)}
+    .btn-primary{background:var(--cun-blue);color:#fff}
+    .btn-ghost{background:#fff;color:var(--text)}
+    .kbd{
+      font:600 11px ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+      background:#0B1426; color:#A5B4FC; padding:2px 6px; border-radius:6px;
+      border:1px solid rgba(255,255,255,.15)
     }
-    .welcome h2{margin:0 0 6px 0;font-size:clamp(18px,2vw,22px)}
-    .welcome p{margin:0;color:#2A3B2D}
-
-    /* Card FAQs */
+    /* Main -----------------------------------------------------*/
+    main{padding:40px 24px}
     .card{
-      margin-top:-22px;background:var(--card);
-      border-radius:var(--radius);box-shadow:var(--shadow);padding:24px;
+      border:1px solid #E6E9F2;border-radius:var(--radius);box-shadow:var(--shadow);
+      padding:24px;background:#fff;
     }
-    .card h3{margin:0 0 8px 0;font-size:clamp(18px,2vw,22px)}
-    .hint{color:var(--muted);margin:0 0 14px 0}
-    .list{margin:0;padding-left:18px}
-    .list li{margin:8px 0;color:#1F2A37}
-    .list li::marker{color:var(--green-600)}
-
-    /* Footer */
-    footer{
-      margin-top:36px;background:var(--green-600);color:#fff;
-      padding:18px;text-align:center;border-top-left-radius:14px;border-top-right-radius:14px
+    .grid{display:grid;gap:16px}
+    @media (min-width:860px){.grid{grid-template-columns:1.2fr .8fr}}
+    h2{margin:0 0 12px;font-size:clamp(20px,2.4vw,28px)}
+    ul{margin:0;padding-left:18px}
+    li{margin:6px 0}
+    .note{
+      margin-top:14px;padding:12px;border-left:4px solid var(--cun-green);
+      background:#F4FBF6;color:#1E3A1E;border-radius:8px;
     }
-
-    /* Chat bubble helper (optional visual anchor on page) */
-    .inline-chat-badge{
-      display:inline-flex;align-items:center;gap:8px;
-      background:#fff;border-radius:999px;padding:8px 12px;
-      box-shadow:var(--shadow);border:1px solid #EDF1F5;color:var(--blue);font-weight:600
-    }
-
-    /* Responsivo */
-    @media (max-width:720px){
-      .hero-inner{grid-template-columns:1fr;text-align:center;padding:16px}
-      .avatar{margin:auto}
-      .header{gap:8px}
-    }
+    footer{padding:24px;color:var(--muted);text-align:center;border-top:1px solid #EEF2F7}
+    .footer-links{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;margin-top:8px}
+    .footer-links a{color:var(--muted);text-decoration:none}
+    .footer-links a:hover{color:var(--cun-blue)}
   </style>
 </head>
+
 <body>
-
-  <!-- ====== TOPBAR ====== -->
-  <div class="topbar">
-    <div class="container header">
-      <div class="brand">
-        <!-- Logo CUN (opcional: cambia por SVG oficial) -->
-        <img src="https://upload.wikimedia.org/wikipedia/commons/3/3a/CUN_logo.svg" alt="CUN" onerror="this.style.display='none'">
-        <div>
-          <h1>Doña Otilia – Asistente de Prácticas CUN</h1>
-          <p class="subtitle">Tu guía para resolver dudas sobre SGP, ARL, documentos y seguimiento de prácticas.</p>
-        </div>
-      </div>
-
-      <div class="cta-group">
-        <a class="btn btn-blue" href="https://bienestaru.cun.edu.co/practicas/" target="_blank" rel="noopener">Ir al SGP</a>
-        <a class="btn btn-green" href="https://sites.google.com/cun.edu.co/practicascun/p%C3%A1gina-principal" target="_blank" rel="noopener">Site de prácticas</a>
-      </div>
-    </div>
-  </div>
-
-  <!-- ====== HERO ====== -->
-  <section class="hero">
+  <header class="hero">
     <div class="container">
-      <div class="hero-inner">
-        <div class="avatar" aria-hidden="true"></div>
-        <div class="welcome">
-          <h2>Hola, mi vida 💚 Soy Otilia</h2>
-          <p>La abuelita de las prácticas. Estoy para ayudarte con el <strong>SGP</strong>, la <strong>ARL</strong>,
-             tus <strong>documentos</strong> y el <strong>seguimiento</strong> del proceso. 
-             ¿Listo para comenzar? <span class="inline-chat-badge">💬 Abre el chat</span></p>
+      <div class="brand">
+        <img src="assets/otilia-512.png" alt="Ícono Doña Otilia" />
+        <div>
+          <div class="tag">🗨️ Asistente de Prácticas CUN</div>
+          <h1>Doña Otilia – tu guía para las prácticas</h1>
+          <p>Resuelve dudas sobre <strong>SGP</strong>, <strong>ARL</strong>, <strong>documentación</strong>, seguimiento y cierre de prácticas. Diseño alineado a la CUN, claro y ligero.</p>
+          <div class="cta-row">
+            <a class="btn btn-primary" href="https://bienestaru.cun.edu.co/practicas/" target="_blank" rel="noopener">Ir al SGP</a>
+            <a class="btn btn-ghost" href="https://sites.google.com/cun.edu.co/practicascun/p%C3%A1gina-principal" target="_blank" rel="noopener">Portal de prácticas</a>
+            <span class="kbd">Esc ⎋</span>
+          </div>
         </div>
       </div>
-
-      <div class="card">
-        <h3>¿Qué puedo preguntarle?</h3>
-        <p class="hint">Ejemplos rápidos para arrancar:</p>
-        <ul class="list">
-          <li>¿Cómo registro mi práctica en el SGP?</li>
-          <li>¿Qué documentos necesito según mi modalidad?</li>
-          <li>¿Cuándo debo subir la carta de finalización?</li>
-          <li>¿Qué pasa si la empresa no tiene convenio?</li>
-        </ul>
-      </div>
     </div>
-  </section>
+  </header>
 
-  <!-- ====== FOOTER ====== -->
+  <main class="container grid" aria-label="Contenido principal">
+    <section class="card">
+      <h2>¿Qué puedes preguntarle?</h2>
+      <ul>
+        <li>¿Cómo registro mi práctica en el SGP?</li>
+        <li>¿Qué documentos necesito según mi modalidad?</li>
+        <li>¿Cuándo debo subir la carta de finalización?</li>
+        <li>¿Qué pasa si la empresa no tiene convenio?</li>
+      </ul>
+      <div class="note">Consejo: ten a la mano tu correo institucional; lo vas a necesitar para acceder a formatos y al SGP.</div>
+    </section>
+
+    <aside class="card" aria-label="Atajos">
+      <h2>Accesos útiles</h2>
+      <ul>
+        <li><a href="https://bienestaru.cun.edu.co/practicas/" target="_blank" rel="noopener">Ingreso a SGP</a></li>
+        <li><a href="https://sites.google.com/cun.edu.co/practicascun/p%C3%A1gina-principal" target="_blank" rel="noopener">Portal de prácticas (Google Sites)</a></li>
+        <li><a href="https://sites.google.com/d/13FDHgVUGipHV9iLd2bPXilmjlAV2opFm/p/1Ud nAsx0ogTTkKA gEJEoIF4ndRCvcZoA/edit" target="_blank" rel="noopener">Tutorial “Evalúa tu Proceso”</a></li>
+      </ul>
+    </aside>
+  </main>
+
   <footer>
-    © 2025 CUN – Coordinación de Prácticas. Todos los derechos reservados.
+    <div>© 2025 CUN – Coordinación de Prácticas</div>
+    <nav class="footer-links" aria-label="Enlaces de pie de página">
+      <a href="https://www.cun.edu.co/" target="_blank" rel="noopener">Sitio CUN</a>
+      <a href="https://bienestaru.cun.edu.co/practicas/" target="_blank" rel="noopener">SGP</a>
+      <a href="https://sites.google.com/cun.edu.co/practicascun/p%C3%A1gina-principal" target="_blank" rel="noopener">Portal de prácticas</a>
+    </nav>
   </footer>
 
-  <!-- ====== CHATBASE EMBED ======
-       Sustituye el snippet por el TUYO desde Chatbase > Deploy > Embed.
-       Este es un ejemplo genérico para que recuerdes dónde va.
-  -->
-<script>
-(function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="sLDgiXlWpHYwWJV6DdWvp";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();
-</script>
+  <!-- ====== CHATBASE (tu snippet oficial) ====== -->
+  <script>
+  (function(){
+    if(!window.chatbase || window.chatbase("getState")!=="initialized"){
+      window.chatbase=(...arguments)=>{
+        if(!window.chatbase.q){window.chatbase.q=[]}
+        window.chatbase.q.push(arguments)
+      };
+      window.chatbase=new Proxy(window.chatbase,{
+        get(target,prop){
+          if(prop==="q"){return target.q}
+          return(...args)=>target(prop,...args)
+        }
+      })
+    }
+    const onLoad=function(){
+      const script=document.createElement("script");
+      script.src="https://www.chatbase.co/embed.min.js";
+      script.id="sLDgiXlWpHYwWJV6DdWvp";   /* <- tu ID embed */
+      script.domain="www.chatbase.co";
+      document.body.appendChild(script)
+    };
+    if(document.readyState==="complete"){onLoad()}
+    else{window.addEventListener("load",onLoad)}
+  })();
+  </script>
 </body>
 </html>
