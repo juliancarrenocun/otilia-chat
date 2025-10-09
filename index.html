@@ -1,53 +1,165 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Doña Otilia – Prácticas CUN</title>
-  <meta name="description" content="Chat de ayuda para estudiantes de prácticas de la CUN">
+  <title>Doña Otilia – Asistente de Prácticas CUN</title>
+
+  <!-- Fuente institucional limpia -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
   <style>
-    :root { --azul:#3B81F6; --gris:#f6f7fb; --negro:#111; }
-    html,body { margin:0; padding:0; font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif; background:#fff; color:#111; }
-    header { padding: 32px 20px; border-bottom:1px solid #eee; background:var(--gris); }
-    .wrap { max-width:900px; margin:0 auto; }
-    h1 { margin:0 0 8px; font-size:28px; }
-    p { margin:8px 0 0; line-height:1.6; }
-    a.btn { display:inline-block; margin-top:16px; padding:12px 18px; border-radius:10px; background:var(--azul); color:#fff; text-decoration:none; }
-    footer { padding:20px; border-top:1px solid #eee; font-size:14px; color:#555; text-align:center; }
+    :root{
+      /* Paleta CUN */
+      --green: #6DBE45;
+      --green-600:#4E8E32;
+      --green-100:#EAF7E3;
+      --blue:  #004B8D;
+      --blue-100:#DDEAFB;
+      --ink:   #1F2A37;
+      --muted: #667085;
+      --bg:    #ffffff;
+      --card:  #ffffff;
+      --shadow: 0 10px 30px rgba(16,24,40,.06);
+      --radius: 16px;
+    }
+
+    *{box-sizing:border-box}
+    html,body{margin:0;background:var(--bg);color:var(--ink);font-family:Poppins,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial,sans-serif}
+
+    /* Header */
+    .topbar{
+      position:sticky;top:0;z-index:2;
+      background:var(--bg);
+      border-bottom:1px solid #EDF1F5;
+    }
+    .container{max-width:1100px;margin:auto;padding:20px}
+    .header{
+      display:flex;align-items:center;gap:16px;justify-content:space-between;
+      flex-wrap:wrap;
+    }
+    .brand{display:flex;align-items:center;gap:12px}
+    .brand img{height:28px}
+    h1{font-size:clamp(22px,2.2vw,28px);margin:0}
+    .subtitle{color:var(--muted);font-size:14px;margin-top:4px}
+
+    .cta-group{display:flex;gap:10px;flex-wrap:wrap}
+    .btn{
+      appearance:none;border:0;border-radius:999px;padding:12px 18px;
+      font-weight:600;cursor:pointer;transition:transform .06s ease,box-shadow .2s ease;
+      text-decoration:none;display:inline-flex;align-items:center;gap:8px
+    }
+    .btn:active{transform:translateY(1px)}
+    .btn-blue{background:var(--blue);color:#fff;box-shadow:0 8px 20px rgba(0,75,141,.25)}
+    .btn-green{background:var(--green);color:#0B2612;box-shadow:0 8px 20px rgba(109,190,69,.25)}
+
+    /* Hero */
+    .hero{
+      background:linear-gradient(135deg, var(--green) 0%, #A5D68B 100%);
+      padding:56px 0;
+    }
+    .hero-inner{
+      display:grid;grid-template-columns:120px 1fr;gap:18px;align-items:center;
+      background:rgba(255,255,255,.6);
+      border-radius:var(--radius);backdrop-filter:saturate(140%) blur(2px);
+      padding:18px 20px;
+    }
+    .avatar{
+      width:120px;height:120px;border-radius:50%;
+      background:#fff url("img/otilia-icon.png") center/85% no-repeat;
+      box-shadow:var(--shadow);border:3px solid #fff;
+    }
+    .welcome h2{margin:0 0 6px 0;font-size:clamp(18px,2vw,22px)}
+    .welcome p{margin:0;color:#2A3B2D}
+
+    /* Card FAQs */
+    .card{
+      margin-top:-22px;background:var(--card);
+      border-radius:var(--radius);box-shadow:var(--shadow);padding:24px;
+    }
+    .card h3{margin:0 0 8px 0;font-size:clamp(18px,2vw,22px)}
+    .hint{color:var(--muted);margin:0 0 14px 0}
+    .list{margin:0;padding-left:18px}
+    .list li{margin:8px 0;color:#1F2A37}
+    .list li::marker{color:var(--green-600)}
+
+    /* Footer */
+    footer{
+      margin-top:36px;background:var(--green-600);color:#fff;
+      padding:18px;text-align:center;border-top-left-radius:14px;border-top-right-radius:14px
+    }
+
+    /* Chat bubble helper (optional visual anchor on page) */
+    .inline-chat-badge{
+      display:inline-flex;align-items:center;gap:8px;
+      background:#fff;border-radius:999px;padding:8px 12px;
+      box-shadow:var(--shadow);border:1px solid #EDF1F5;color:var(--blue);font-weight:600
+    }
+
+    /* Responsivo */
+    @media (max-width:720px){
+      .hero-inner{grid-template-columns:1fr;text-align:center;padding:16px}
+      .avatar{margin:auto}
+      .header{gap:8px}
+    }
   </style>
 </head>
 <body>
-  <header>
-    <div class="wrap">
-      <h1>💬 Doña Otilia – Asistente de Prácticas CUN</h1>
-      <p>Tu guía para resolver dudas sobre SGP, ARL, documentos y seguimiento de prácticas.</p>
-      <a class="btn" href="https://bienestaru.cun.edu.co/practicas/" target="_blank">Ir al SGP</a>
+
+  <!-- ====== TOPBAR ====== -->
+  <div class="topbar">
+    <div class="container header">
+      <div class="brand">
+        <!-- Logo CUN (opcional: cambia por SVG oficial) -->
+        <img src="https://upload.wikimedia.org/wikipedia/commons/3/3a/CUN_logo.svg" alt="CUN" onerror="this.style.display='none'">
+        <div>
+          <h1>Doña Otilia – Asistente de Prácticas CUN</h1>
+          <p class="subtitle">Tu guía para resolver dudas sobre SGP, ARL, documentos y seguimiento de prácticas.</p>
+        </div>
+      </div>
+
+      <div class="cta-group">
+        <a class="btn btn-blue" href="https://bienestaru.cun.edu.co/practicas/" target="_blank" rel="noopener">Ir al SGP</a>
+        <a class="btn btn-green" href="https://sites.google.com/cun.edu.co/practicascun/p%C3%A1gina-principal" target="_blank" rel="noopener">Site de prácticas</a>
+      </div>
     </div>
-  </header>
+  </div>
 
-  <main class="wrap">
-    <h2>¿Qué puedo preguntarle?</h2>
-    <ul>
-      <li>¿Cómo registro mi práctica en el SGP?</li>
-      <li>¿Qué documentos necesito según mi modalidad?</li>
-      <li>¿Cuándo debo subir la carta de finalización?</li>
-      <li>¿Qué pasa si la empresa no tiene convenio?</li>
-    </ul>
-  </main>
+  <!-- ====== HERO ====== -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-inner">
+        <div class="avatar" aria-hidden="true"></div>
+        <div class="welcome">
+          <h2>Hola, mi vida 💚 Soy Otilia</h2>
+          <p>La abuelita de las prácticas. Estoy para ayudarte con el <strong>SGP</strong>, la <strong>ARL</strong>,
+             tus <strong>documentos</strong> y el <strong>seguimiento</strong> del proceso. 
+             ¿Listo para comenzar? <span class="inline-chat-badge">💬 Abre el chat</span></p>
+        </div>
+      </div>
 
+      <div class="card">
+        <h3>¿Qué puedo preguntarle?</h3>
+        <p class="hint">Ejemplos rápidos para arrancar:</p>
+        <ul class="list">
+          <li>¿Cómo registro mi práctica en el SGP?</li>
+          <li>¿Qué documentos necesito según mi modalidad?</li>
+          <li>¿Cuándo debo subir la carta de finalización?</li>
+          <li>¿Qué pasa si la empresa no tiene convenio?</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== FOOTER ====== -->
   <footer>
-    Coordinación de Prácticas – CUN © 2025
+    © 2025 CUN – Coordinación de Prácticas. Todos los derechos reservados.
   </footer>
 
-  <!-- 🔵 Inserta aquí tu script de Chatbase -->
-  <!--
-  <script>
-    window.embeddedChatbotConfig = {
-      chatbotId: "TU_ID_CHATBASE",
-      domain: "www.chatbase.co"
-    }
-  </script>
-  <script src="https://www.chatbase.co/chatbot-embed.js" defer></script>
+  <!-- ====== CHATBASE EMBED ======
+       Sustituye el snippet por el TUYO desde Chatbase > Deploy > Embed.
+       Este es un ejemplo genérico para que recuerdes dónde va.
   -->
 <script>
 (function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="sLDgiXlWpHYwWJV6DdWvp";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();
