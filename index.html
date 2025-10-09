@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Doña Otilia – Prácticas CUN</title>
+  <meta name="description" content="Chat de ayuda para estudiantes de prácticas de la CUN">
+  <style>
+    :root { --azul:#3B81F6; --gris:#f6f7fb; --negro:#111; }
+    html,body { margin:0; padding:0; font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif; background:#fff; color:#111; }
+    header { padding: 32px 20px; border-bottom:1px solid #eee; background:var(--gris); }
+    .wrap { max-width:900px; margin:0 auto; }
+    h1 { margin:0 0 8px; font-size:28px; }
+    p { margin:8px 0 0; line-height:1.6; }
+    a.btn { display:inline-block; margin-top:16px; padding:12px 18px; border-radius:10px; background:var(--azul); color:#fff; text-decoration:none; }
+    footer { padding:20px; border-top:1px solid #eee; font-size:14px; color:#555; text-align:center; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <h1>💬 Doña Otilia – Asistente de Prácticas CUN</h1>
+      <p>Tu guía para resolver dudas sobre SGP, ARL, documentos y seguimiento de prácticas.</p>
+      <a class="btn" href="https://bienestaru.cun.edu.co/practicas/" target="_blank">Ir al SGP</a>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <h2>¿Qué puedo preguntarle?</h2>
+    <ul>
+      <li>¿Cómo registro mi práctica en el SGP?</li>
+      <li>¿Qué documentos necesito según mi modalidad?</li>
+      <li>¿Cuándo debo subir la carta de finalización?</li>
+      <li>¿Qué pasa si la empresa no tiene convenio?</li>
+    </ul>
+  </main>
+
+  <footer>
+    Coordinación de Prácticas – CUN © 2025
+  </footer>
+
+  <!-- 🔵 Inserta aquí tu script de Chatbase -->
+  <!--
+  <script>
+    window.embeddedChatbotConfig = {
+      chatbotId: "TU_ID_CHATBASE",
+      domain: "www.chatbase.co"
+    }
+  </script>
+  <script src="https://www.chatbase.co/chatbot-embed.js" defer></script>
+  -->
+<script>
+(function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="sLDgiXlWpHYwWJV6DdWvp";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();
+</script>
+</body>
+</html>
