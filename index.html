@@ -13,6 +13,9 @@
   <meta property="og:image" content="assets/otilia-512.png?v=2025-10-09" />
   <meta property="og:type" content="website" />
 
+  <!-- Performance (chat) -->
+  <link rel="preconnect" href="https://www.chatbase.co" crossorigin>
+
   <!-- Icons & PWA -->
   <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png?v=2025-10-09" />
   <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png?v=2025-10-09" />
@@ -66,6 +69,15 @@
     .btn:active{transform:translateY(0)}
     .btn-primary{background:var(--cun-blue);color:#fff}
     .btn-ghost{background:#fff;color:var(--text)}
+    .btn-secondary{
+      background:transparent;
+      color:#E6ECFF;
+      border:1.6px solid rgba(255,255,255,.35);
+    }
+    .btn-secondary:hover{
+      border-color:#fff;
+      background:rgba(255,255,255,.08);
+    }
 
     /* Main -----------------------------------------------------*/
     main{padding:40px 24px}
@@ -99,8 +111,9 @@
           <h1>Doña Otilia – tu guía para las prácticas</h1>
           <p>Resuelve dudas sobre <strong>SGP</strong>, <strong>ARL</strong>, <strong>documentación</strong>, seguimiento y cierre de prácticas.</p>
           <div class="cta-row">
-            <a class="btn btn-primary" href="https://bienestaru.cun.edu.co/practicas/" target="_blank" rel="noopener">Ir al SGP</a>
-            <a class="btn btn-ghost" href="https://sites.google.com/cun.edu.co/practicascun/p%C3%A1gina-principal" target="_blank" rel="noopener">Portal de prácticas</a>
+            <a class="btn btn-primary" href="https://bienestaru.cun.edu.co/practicas/?utm_source=otilia&utm_medium=hero_cta&utm_campaign=sgp" target="_blank" rel="noopener">Ir al SGP</a>
+            <a class="btn btn-ghost" href="https://sites.google.com/cun.edu.co/practicascun/p%C3%A1gina-principal?utm_source=otilia&utm_medium=hero_cta&utm_campaign=portal" target="_blank" rel="noopener">Portal de prácticas</a>
+            <button class="btn btn-secondary" type="button" id="btnChat">Hablar con Otilia</button>
           </div>
         </div>
       </div>
@@ -122,8 +135,8 @@
     <aside class="card" aria-label="Atajos">
       <h2>Accesos útiles</h2>
       <ul>
-        <li><a href="https://bienestaru.cun.edu.co/practicas/" target="_blank" rel="noopener">Ingreso a SGP</a></li>
-        <li><a href="https://sites.google.com/cun.edu.co/practicascun/p%C3%A1gina-principal" target="_blank" rel="noopener">Portal de prácticas (Google Sites)</a></li>
+        <li><a href="https://bienestaru.cun.edu.co/practicas/?utm_source=otilia&utm_medium=sidebar_link&utm_campaign=sgp" target="_blank" rel="noopener">Ingreso a SGP</a></li>
+        <li><a href="https://sites.google.com/cun.edu.co/practicascun/p%C3%A1gina-principal?utm_source=otilia&utm_medium=sidebar_link&utm_campaign=portal" target="_blank" rel="noopener">Portal de prácticas (Google Sites)</a></li>
       </ul>
     </aside>
   </main>
@@ -137,7 +150,7 @@
     </nav>
   </footer>
 
-  <!-- ====== CHATBASE (tu snippet oficial) ====== -->
+  <!-- ====== CHATBASE (snippet oficial) ====== -->
   <script>
   (function(){
     if(!window.chatbase || window.chatbase("getState")!=="initialized"){
@@ -147,7 +160,7 @@
     const onLoad=function(){
       const script=document.createElement("script");
       script.src="https://www.chatbase.co/embed.min.js";
-      script.id="sLDgiXlWpHYwWJV6DdWvp";   /* <- tu ID embed */
+      script.id="sLDgiXlWpHYwWJV6DdWvp";   /* <- tu ID de embed */
       script.domain="www.chatbase.co";
       document.body.appendChild(script);
     };
@@ -156,7 +169,31 @@
   })();
   </script>
 
-  <!-- ====== SERVICE WORKER (para PWA y caché) ====== -->
+  <!-- Botón que abre el chat (con fallback seguro) -->
+  <script>
+    (function () {
+      const openChat = () => {
+        try {
+          if (window.chatbase && typeof window.chatbase === 'function') {
+            try { window.chatbase('open'); return; } catch(e){}
+            try { window.chatbase('toggle'); return; } catch(e){}
+          }
+        } catch (e) {}
+        // Fallback: intenta clicar la burbuja del widget
+        const clickBubble = () => {
+          const bubble = document.querySelector('[class*="Chatbase"] button, .chatbase-bubble, [aria-label*="chat"], [class*="bubble"]');
+          if (bubble) bubble.click();
+        };
+        clickBubble();
+        setTimeout(clickBubble, 600);
+      };
+
+      const btn = document.getElementById('btnChat');
+      if (btn) btn.addEventListener('click', openChat);
+    })();
+  </script>
+
+  <!-- ====== SERVICE WORKER (PWA y caché) ====== -->
   <script>
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
