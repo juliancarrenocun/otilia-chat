@@ -204,18 +204,22 @@
     }
   </script>
 
-  <!-- ====== Saludo de Otilia (solo alerta por ahora, sin audio) ====== -->
-  <script>
-    (function () {
-      const helloText = "Hola, mi vida, soy Doña Otilia, tu abuelita de prácticas de la CUN. Estoy aquí para ayudarte con SGP, ARL, documentos y fechas. Pregúntame con confianza; y si te me sales del tema, te encarrilo con cariño. ¿Listo, corazón?";
-      const btn = document.getElementById('otilia-hello-btn');
-      if (btn) {
-        btn.addEventListener('click', () => {
-          alert('Otilia dice:\n\n' + helloText + '\n\n(En el siguiente paso activaremos la voz sin gastar créditos automáticamente.)');
-          console.log('[Otilia Hello Text]', helloText);
-        });
-      }
-    })();
-  </script>
+<!-- ====== Saludo de Otilia (con audio local MP3) ====== -->
+<script>
+(function () {
+  const helloText = "Hola, mi vida, soy Doña Otilia, tu abuelita de prácticas de la CUN. Estoy aquí para ayudarte con SGP, ARL, documentos y fechas. Pregúntame con confianza; y si te me sales del tema, te encarrilo con cariño. ¿Listo, corazón?";
+  const audioUrl = "assets/otilia-saludo.mp3"; // Archivo local
+  const btn = document.getElementById('otilia-hello-btn');
+  const audio = new Audio(audioUrl);
+
+  if (btn) {
+    btn.addEventListener('click', () => {
+      audio.currentTime = 0;
+      audio.play().catch(err => console.error("No se pudo reproducir el audio:", err));
+      console.log('[Otilia Hello]', helloText);
+    });
+  }
+})();
+</script>
 </body>
 </html>
