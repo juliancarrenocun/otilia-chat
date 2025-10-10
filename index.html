@@ -201,5 +201,167 @@
       });
     }
   </script>
+  
+  <!-- ===== Audio Otilia: UI mínima (pruebas) ===== -->
+<style>
+  .otilia-tts {
+    position: fixed; right: 18px; bottom: 96px; z-index: 9999;
+    display: grid; gap: 8px; width: min(360px, 92vw);
+    font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue";
+  }
+  .otilia-tts .bar {
+    display:flex; gap:8px; align-items:center; background:#0B1426;
+    color:#fff; border-radius:12px; padding:10px 12px; box-shadow:0 8px 30px rgba(2,6,23,.18);
+  }
+  .otilia-tts textarea {
+    width:100%; min-height:64px; resize:vertical; border:1px solid #e6e9f2;
+    border-radius:10px; padding:10px 12px; font-size:14px;
+  }
+  .otilia-tts button {
+    border:0; border-radius:10px; padding:10px 12px; cursor:pointer;
+    font-weight:600; background:#3B81F6; color:#fff;
+  }
+  .otilia-tts button.secondary { background:#fff; color:#0F172A; border:1px solid #E6E9F2; }
+  .otilia-tts .hint { font-size:12px; color:#667085; text-align:center }
+  .otilia-tts .pill { font-size:12px; background:#fff1; padding:4px 8px; border-radius:999px; }
+</style>
+
+<div class="otilia-tts" id="otilia-tts">
+  <div class="bar">
+    <span>🔊</span>
+    <strong>Escuchar a Doña Otilia</strong>
+    <span class="pill" id="otilia-tts-state">Listo</span>
+    <div style="margin-left:auto;display:flex;gap:8px">
+      <button id="otilia-tts-play">Reproducir</button>
+      <button id="otilia-tts-stop" class="secondary">Detener</button>
+    </div>
+  </div>
+  <textarea id="otilia-tts-text" placeholder="Pega aquí la respuesta de Otilia y presiona Reproducir…"></textarea>
+  <div class="hint">Tip: mientras el chat esté en un <i>iframe</i> de Chatbase, no podemos leer su texto por seguridad del navegador. Cuando tengamos un 'hook' o espejo del mensaje, lo pasamos directo a <code>OtiliaTTS.speak(text)</code>.</div>
+</div>
+
+<script>
+/**
+ * OtiliaTTS – TTS bajo demanda con ElevenLabs (demo en cliente).
+ * ⚠️ Para producción, usa el proxy seguro de la sección 2.
+ */
+(function () {
+  // ======= CONFIG =======
+  const API_KEY  = "3d7432ee9fe833b40e43ab19a418f5b5"; // ⚠️ SOLO PARA PRUEBAS
+  const VOICE_ID = "Alegria Sana";   // Reemplaza con la voz elegida
+  const MODEL_ID = "eleven_multilingual_v2";
+
+  // Controles de voz sugeridos para "abuelita cálida"
+  const VOICE_SETTINGS = {
+    stability: 0.65,          // 0–1
+    similarity_boost: 0.85,   // 0–1
+    style: 0.20,              // 0–1
+    use_speaker_boost: false
+  };
+  const GENERATION = {        // velocidad (0.7–1.2)
+    // ElevenLabs usa "voice_settings" + "model_id". La Speed se pasa como 'optimize_streaming_latency' (o en body 'voice_settings' si tu plan lo expone). Para compatibilidad:
+    // Muchos proyectos controlan "speed" via SSML <prosody rate="..."> (no todos los modelos lo soportan). Aquí lo dejamos neutro.
+  };
+
+  // ======= ESTADO/UI =======
+  const $text  = document.getElementById("otilia-tts-text");
+  const $play  = document.getElementById("otilia-tts-play");
+  const $stop  = document.getElementById("otilia-tts-stop");
+  const $state = document.getElementById("otilia-tts-state");
+
+  let audioEl = null;
+  let currentUrl = null;
+
+  // Caché en memoria: misma frase => no gasta créditos otra vez
+  const cache = new Map(); // key = hash(text+settings) -> objectURL
+
+  function hashKey(text) {
+    return `${text}|${JSON.stringify(VOICE_SETTINGS)}|${MODEL_ID}`;
+  }
+
+  function setState(label) { $state.textContent = label; }
+
+  async function fetchTTS(text) {
+    const key = hashKey(text);
+    if (cache.has(key)) {
+      return cache.get(key);
+    }
+
+    const endpoint = `https://api.elevenlabs.io/v1/text-to-speech/${VOICE_ID}`;
+
+    const body = {
+      model_id: MODEL_ID,
+      text,
+      voice_settings: VOICE_SETTINGS
+    };
+
+    const res = await fetch(endpoint, {
+      method: "POST",
+      headers: {
+        "xi-api-key": API_KEY,
+        "Content-Type": "application/json",
+        "Accept": "audio/mpeg"
+      },
+      body: JSON.stringify(body)
+    });
+
+    if (!res.ok) {
+      const errTxt = await res.text().catch(()=>res.statusText);
+      throw new Error(`TTS error ${res.status}: ${errTxt}`);
+    }
+    const blob = await res.blob();
+    const url  = URL.createObjectURL(blob);
+    cache.set(key, url);
+    return url;
+  }
+
+  function stopAudio() {
+    if (audioEl) {
+      audioEl.pause();
+      audioEl.src = "";
+      audioEl.remove();
+      audioEl = null;
+    }
+    if (currentUrl) {
+      URL.revokeObjectURL(currentUrl);
+      currentUrl = null;
+    }
+    setState("Listo");
+  }
+
+  async function playText(text) {
+    if (!text || !text.trim()) {
+      alert("Pega o pasa un texto para reproducir.");
+      return;
+    }
+    stopAudio();
+    setState("Generando…");
+
+    try {
+      const url = await fetchTTS(text.trim());
+      currentUrl = url;
+      audioEl = new Audio(url);
+      audioEl.oncanplay = () => setState("Reproduciendo…");
+      audioEl.onended   = () => setState("Listo");
+      audioEl.onerror   = () => setState("Error");
+      audioEl.play();
+    } catch (err) {
+      console.error(err);
+      setState("Error");
+      alert("No se pudo generar audio. Revisa la consola y tu API Key / VOICE_ID.");
+    }
+  }
+
+  // Exponer API pública para cuando tengas el texto del chat:
+  window.OtiliaTTS = {
+    speak: (text) => playText(text),
+    stop:  () => stopAudio()
+  };
+
+  // Botones
+  $play.addEventListener("click", () => playText($text.value));
+  $stop.addEventListener("click", stopAudio);
+})();
+</script>
 </body>
 </html>
