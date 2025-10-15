@@ -12,25 +12,29 @@
   <!-- =================== OPEN GRAPH (PREVISUALIZACIÓN) =================== -->
   <meta property="og:title" content="Doña Otilia – Asistente de Prácticas CUN" />
   <meta property="og:description" content="Resuelve tus dudas de prácticas: SGP, ARL, documentos, seguimiento y cierre." />
-  <meta property="og:image" content="assets/otilia-512.png?v=2025-10-09" />
+  <meta property="og:image" content="assets/web-app-manifest-512x512.png" />
   <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://juliancarrenocun.github.io/otilia-chat/" />
 
   <!-- =================== PERFORMANCE (CHATBASE) =================== -->
   <link rel="preconnect" href="https://www.chatbase.co" crossorigin>
 
   <!-- =================== ICONOS & PWA =================== -->
-  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png?v=2025-10-09" />
-  <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png?v=2025-10-09" />
-  <link rel="manifest" href="manifest.webmanifest?v=2025-10-09" />
+  <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+  <link rel="icon" type="image/png" sizes="96x96" href="assets/favicon-96x96.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="assets/web-app-manifest-192x192.png" />
+  <link rel="icon" type="image/png" sizes="512x512" href="assets/web-app-manifest-512x512.png" />
+  <link rel="manifest" href="assets/site.webmanifest" />
 
   <!-- =================== ESTILOS BASE (MISMOS COLORES) =================== -->
   <style>
     :root{
-      --cun-blue:#3B81F6;         /* primario del chat */
-      --cun-green:#47A447;        /* acento institucional CUN */
-      --bg:#0B1426;               /* fondo header (oscuro limpio) */
-      --text:#0F172A;             /* texto principal */
-      --muted:#556070;            /* texto secundario */
+      --cun-blue:#3B81F6;
+      --cun-green:#47A447;
+      --bg:#0B1426;
+      --text:#0F172A;
+      --muted:#556070;
       --radius:16px;
       --shadow:0 8px 30px rgba(2,6,23,.08);
     }
@@ -45,7 +49,6 @@
       text-rendering:optimizeLegibility;
     }
 
-    /* =================== HEADER / HERO =================== */
     .hero{
       background: radial-gradient(1200px 500px at 70% -10%, rgba(71,164,71,.18), transparent 60%), var(--bg);
       color:#fff;
@@ -81,7 +84,6 @@
       background:rgba(255,255,255,.08);
     }
 
-    /* =================== MAIN / TARJETAS =================== */
     main{padding:40px 24px}
     .card{
       border:1px solid #E6E9F2;border-radius:var(--radius);box-shadow:var(--shadow);
@@ -97,13 +99,11 @@
       background:#F4FBF6;color:#1E3A1E;border-radius:8px;
     }
 
-    /* =================== FOOTER =================== */
     footer{padding:24px;color:var(--muted);text-align:center;border-top:1px solid #EEF2F7}
     .footer-links{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;margin-top:8px}
     .footer-links a{color:var(--muted);text-decoration:none}
     .footer-links a:hover{color:var(--cun-blue)}
 
-    /* =================== WIDGET AUDIO (SALUDO) =================== */
     .otilia-audio {
       position: fixed; left: 18px; bottom: 96px; z-index: 9999;
       width: min(420px, 92vw);
@@ -137,11 +137,10 @@
 </head>
 
 <body>
-  <!-- =================== HERO =================== -->
   <header class="hero">
     <div class="container">
       <div class="brand">
-        <img src="assets/otilia-512.png" alt="Ícono Doña Otilia" />
+        <img src="assets/web-app-manifest-512x512.png" alt="Ícono Doña Otilia" />
         <div>
           <div class="tag">🗨️ Asistente de Prácticas CUN</div>
           <h1>Doña Otilia – tu guía para las prácticas</h1>
@@ -156,8 +155,7 @@
     </div>
   </header>
 
-  <!-- =================== CONTENIDO PRINCIPAL =================== -->
-  <main class="container grid" aria-label="Contenido principal">
+  <main class="container grid">
     <section class="card">
       <h2>¿Qué puedes preguntarle?</h2>
       <ul>
@@ -169,7 +167,7 @@
       <div class="note">Consejo: ten a la mano tu correo institucional; lo vas a necesitar para acceder a formatos y al SGP.</div>
     </section>
 
-    <aside class="card" aria-label="Atajos">
+    <aside class="card">
       <h2>Accesos útiles</h2>
       <ul>
         <li><a href="https://bienestaru.cun.edu.co/practicas/?utm_source=otilia&utm_medium=sidebar_link&utm_campaign=sgp" target="_blank" rel="noopener">Ingreso a SGP</a></li>
@@ -178,36 +176,33 @@
     </aside>
   </main>
 
-  <!-- =================== FOOTER =================== -->
   <footer>
     <div>© 2025 CUN – Coordinación de Prácticas</div>
-    <nav class="footer-links" aria-label="Enlaces de pie de página">
+    <nav class="footer-links">
       <a href="https://www.cun.edu.co/" target="_blank" rel="noopener">Sitio CUN</a>
       <a href="https://bienestaru.cun.edu.co/practicas/" target="_blank" rel="noopener">SGP</a>
       <a href="https://sites.google.com/cun.edu.co/practicascun/p%C3%A1gina-principal" target="_blank" rel="noopener">Portal de prácticas</a>
     </nav>
   </footer>
 
-  <!-- =================== CHATBASE (SNIPPET OFICIAL) =================== -->
   <script>
   (function(){
     if(!window.chatbase || window.chatbase("getState")!=="initialized"){
-      window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};
-      window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}});
+      window.chatbase=(...a)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(a)};
+      window.chatbase=new Proxy(window.chatbase,{get(t,p){if(p==="q"){return t.q}return(...a)=>t(p,...a)}});
     }
     const onLoad=function(){
-      const script=document.createElement("script");
-      script.src="https://www.chatbase.co/embed.min.js";
-      script.id="sLDgiXlWpHYwWJV6DdWvp";   /* <- tu ID de embed */
-      script.domain="www.chatbase.co";
-      document.body.appendChild(script);
+      const s=document.createElement("script");
+      s.src="https://www.chatbase.co/embed.min.js";
+      s.id="sLDgiXlWpHYwWJV6DdWvp";
+      s.domain="www.chatbase.co";
+      document.body.appendChild(s);
     };
     if(document.readyState==="complete"){onLoad()}
     else{window.addEventListener("load",onLoad)}
   })();
   </script>
 
-  <!-- =================== BOTÓN QUE ABRE EL CHAT =================== -->
   <script>
     (function () {
       const openChat = () => {
@@ -217,10 +212,9 @@
             try { window.chatbase('toggle'); return; } catch(e){}
           }
         } catch (e) {}
-        // Fallback: intenta clicar la burbuja del widget
         const clickBubble = () => {
-          const bubble = document.querySelector('[class*="Chatbase"] button, .chatbase-bubble, [aria-label*="chat"], [class*="bubble"]');
-          if (bubble) bubble.click();
+          const b = document.querySelector('[class*="Chatbase"] button, .chatbase-bubble, [aria-label*="chat"], [class*="bubble"]');
+          if (b) b.click();
         };
         clickBubble();
         setTimeout(clickBubble, 600);
@@ -230,50 +224,40 @@
     })();
   </script>
 
-  <!-- =================== SERVICE WORKER (PWA Y CACHÉ) =================== -->
   <script>
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('sw.js?v=2025-10-09');
+        navigator.serviceWorker.register('sw.js');
       });
     }
   </script>
 
-  <!-- =================== WIDGET: AUDIO SALUDO DE DOÑA OTILIA =================== -->
-  <!-- Reproduce un MP3 local, con Play / Pausa / Stop y barra de progreso con tiempos -->
-  <div class="otilia-audio" role="region" aria-label="Reproductor saludo de Doña Otilia">
+  <div class="otilia-audio">
     <div class="row">
-      <span aria-hidden="true">🎙️</span>
+      <span>🎙️</span>
       <div class="title">Saludo de Doña Otilia</div>
       <span id="oa-state" class="time" style="margin-left:auto">Listo</span>
     </div>
 
-    <!-- Controles principales -->
-    <div class="row" aria-label="Controles de reproducción">
-      <button id="oa-play" type="button" aria-label="Reproducir">▶️ Play</button>
-      <button id="oa-pause" type="button" class="secondary" aria-label="Pausar">⏸️ Pausa</button>
-      <button id="oa-stop" type="button" class="secondary" aria-label="Detener">⏹️ Stop</button>
+    <div class="row">
+      <button id="oa-play">▶️ Play</button>
+      <button id="oa-pause" class="secondary">⏸️ Pausa</button>
+      <button id="oa-stop" class="secondary">⏹️ Stop</button>
     </div>
 
-    <!-- Barra de progreso + tiempos -->
-    <label for="oa-seek" class="sr-only">Barra de progreso</label>
-    <input id="oa-seek" type="range" min="0" max="100" step="0.1" value="0" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Posición del audio">
-    <div class="row" aria-hidden="true">
+    <input id="oa-seek" type="range" min="0" max="100" step="0.1" value="0">
+    <div class="row">
       <div class="time" id="oa-current">0:00</div>
       <div class="time" id="oa-duration" style="margin-left:auto">0:00</div>
     </div>
   </div>
 
   <script>
-    // ===== Reproductor de audio con progreso, tiempos y control de seek =====
     (function(){
-      // Ruta de tu MP3 (asegúrate que exista): /assets/audio/bienvenida-otilia.mp3
       const AUDIO_SRC = 'assets/audio/bienvenida-otilia.mp3';
-
       const audio = new Audio(AUDIO_SRC);
       audio.preload = 'metadata';
 
-      // Elementos UI
       const $play = document.getElementById('oa-play');
       const $pause = document.getElementById('oa-pause');
       const $stop = document.getElementById('oa-stop');
@@ -282,61 +266,31 @@
       const $cur = document.getElementById('oa-current');
       const $dur = document.getElementById('oa-duration');
 
-      // Formatea segundos a mm:ss
-      const fmt = (secs) => {
-        if (isNaN(secs) || !isFinite(secs)) return '0:00';
-        const m = Math.floor(secs / 60);
-        const s = Math.floor(secs % 60).toString().padStart(2,'0');
-        return `${m}:${s}`;
+      const fmt = (s) => {
+        if (isNaN(s) || !isFinite(s)) return '0:00';
+        const m = Math.floor(s / 60);
+        const sec = Math.floor(s % 60).toString().padStart(2,'0');
+        return `${m}:${sec}`;
       };
+      const setState = (t) => { $state.textContent = t; };
 
-      // Estados visibles
-      const setState = (txt) => { $state.textContent = txt; };
-
-      // Listeners de metadata / duración
-      audio.addEventListener('loadedmetadata', () => {
-        $dur.textContent = fmt(audio.duration);
-      });
-
-      // Actualiza progreso mientras suena
+      audio.addEventListener('loadedmetadata', () => { $dur.textContent = fmt(audio.duration); });
       audio.addEventListener('timeupdate', () => {
         const pct = (audio.currentTime / (audio.duration || 1)) * 100;
         $seek.value = pct.toFixed(1);
-        $seek.setAttribute('aria-valuenow', $seek.value);
         $cur.textContent = fmt(audio.currentTime);
       });
+      audio.addEventListener('ended', () => { setState('Listo'); $seek.value=0; $cur.textContent='0:00'; });
 
-      // Fin del audio
-      audio.addEventListener('ended', () => {
-        setState('Listo');
-        $seek.value = 0;
-        $cur.textContent = '0:00';
-      });
+      $play.addEventListener('click', () => { audio.play().then(()=>setState('Reproduciendo…')).catch(()=>setState('Error')); });
+      $pause.addEventListener('click', () => { audio.pause(); setState('Pausado'); });
+      $stop.addEventListener('click', () => { audio.pause(); audio.currentTime=0; setState('Listo'); });
 
-      // Controles
-      $play.addEventListener('click', () => {
-        audio.play().then(()=> setState('Reproduciendo…')).catch(()=> setState('Error'));
-      });
-      $pause.addEventListener('click', () => {
-        audio.pause();
-        setState('Pausado');
-      });
-      $stop.addEventListener('click', () => {
-        audio.pause();
-        audio.currentTime = 0;
-        setState('Listo');
-      });
-
-      // Seek manual
-      let seeking = false;
       $seek.addEventListener('input', () => {
-        seeking = true;
         const pct = parseFloat($seek.value) / 100;
         audio.currentTime = pct * (audio.duration || 0);
         $cur.textContent = fmt(audio.currentTime);
       });
-      $seek.addEventListener('change', () => { seeking = false; });
-
     })();
   </script>
 </body>
