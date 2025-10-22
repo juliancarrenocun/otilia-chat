@@ -325,23 +325,21 @@
 
     // Tips locales (editable)
     (function(){
-      const tips = [
-        "Revisa primero los lineamientos del programa y evita correcciones a última hora.",
-        "Guarda todo en tu Drive institucional con nombres claros: 'ARL_Nombre_Apellido.pdf'.",
-        "Si la empresa no tiene convenio, pregunta por los pasos de vinculación antes de empezar.",
-        "El registro en SGP debe hacerse antes de subir documentos; así evitas rechazos.",
-        "Para validar experiencia laboral, confirma que tu rol actual sí coincide con tu plan de mejoramiento."
-      ];
+  fetch('assets/tips.json')
+    .then(r => r.json())
+    .then(data => {
       const list = document.getElementById('tipsList');
-      // Muestra 3 al azar sin repetir
-      const shuffled = tips.sort(()=>Math.random()-.5).slice(0,3);
-      shuffled.forEach(t=>{
+      const tips = data.tips.sort(()=>Math.random()-.5).slice(0,3);
+      tips.forEach(t=>{
         const d=document.createElement('div');
         d.className='tip';
         d.textContent='💡 '+t;
         list.appendChild(d);
       });
-    })();
+    })
+    .catch(()=>console.warn('No se pudieron cargar los tips'));
+})();
+
 
     // Modo claro/oscuro
     (function(){
