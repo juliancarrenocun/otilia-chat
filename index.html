@@ -3,23 +3,19 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Julia – Asistente de Prácticas CUN</title>
+  <title>Doña Otilia – Asistente de Prácticas CUN</title>
 
   <!-- META -->
-  <meta name="description" content="Tu abuelita digital para resolver dudas sobre SGP, ARL, documentos y seguimiento de prácticas en la CUN." />
-  <meta name="theme-color" content="#111111" />
-
-  <!-- Open Graph -->
-  <meta property="og:title" content="Julia – Asistente de Prácticas CUN" />
+  <meta name="description" content="Tu guía para resolver dudas sobre SGP, ARL, documentos y seguimiento de prácticas en la CUN." />
+  <meta name="theme-color" content="#FF8F00" />
+  <meta property="og:title" content="Doña Otilia – Asistente de Prácticas CUN" />
   <meta property="og:description" content="Resuelve tus dudas de prácticas: SGP, ARL, documentos, seguimiento y cierre." />
   <meta property="og:image" content="assets/web-app-manifest-512x512.png" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://juliancarrenocun.github.io/otilia-chat/" />
 
-  <!-- Performance (chat) -->
+  <!-- ICONOS & PWA -->
   <link rel="preconnect" href="https://www.chatbase.co" crossorigin>
-
-  <!-- Icons & PWA (los tuyos actuales) -->
   <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
   <link rel="icon" type="image/png" sizes="96x96" href="assets/favicon-96x96.png" />
   <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png" />
@@ -27,205 +23,167 @@
   <link rel="icon" type="image/png" sizes="512x512" href="assets/web-app-manifest-512x512.png" />
   <link rel="manifest" href="assets/site.webmanifest" />
 
-  <!-- ESTILOS -->
   <style>
     :root{
-      /* Paleta “divergente” */
-      --bg:#0b0b0c;          /* fondo base */
-      --ink:#111214;         /* texto oscuro */
-      --paper:#ffffff;       /* tarjetas */
-      --muted:#9aa3b2;       /* texto secundario */
-      --orange:#ff7a00;      /* btn / acento */
-      --orange-2:#ff9a1a;    /* hover/acento claro */
-      --glow:#ff7a00;
-      --card-br:#1f232b;
+      --orange:#FF8F00;
+      --orange-2:#FFB347; /* brillo suave */
+      --bg-900:#0B0C0F;   /* fondo principal */
+      --bg-850:#111218;   /* hero y cards */
+      --bg-800:#161821;
+      --card:#14161C;
+      --text:#F5F7FA;     /* blanco cálido */
+      --muted:#C9CFD9;
+      --muted-2:#8E95A3;
+      --shadow:0 10px 30px rgba(255,143,0,.25);
       --radius:16px;
-      --shadow:0 10px 30px rgba(0,0,0,.24);
+      --ring:0 0 0 2px rgba(255,143,0,.35), 0 0 35px rgba(255,143,0,.25);
     }
-    [data-theme="dark"]{
-      --paper:#0f1114;
-      --ink:#eaeef6;
-      --muted:#b8c0cc;
-      --card-br:#1b1f25;
-    }
-
     *{box-sizing:border-box}
     html,body{margin:0}
     body{
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
-      background: var(--bg);
-      color: var(--ink);
+      color:var(--text);
+      background: radial-gradient(1200px 600px at 20% 0%, rgba(255,143,0,.10), transparent 60%), var(--bg-900);
+      line-height:1.55;
       -webkit-font-smoothing:antialiased;
       text-rendering:optimizeLegibility;
-      line-height:1.5;
     }
 
-    /* Header compacto con logo CUN sutil */
-    .topbar{
-      display:flex; align-items:center; justify-content:space-between;
-      gap:12px; padding:10px 20px; border-bottom:1px solid var(--card-br);
-      background: linear-gradient(90deg,#0b0b0c 0%, #121316 100%);
-    }
-    .topbar .brand-mini{display:flex; align-items:center; gap:10px}
-    .topbar img.logo-cun{width:28px; height:28px; border-radius:4px; opacity:.9}
-    .mode-toggle{
-      border:1px solid var(--card-br); background:#0f1114; color:#fff; border-radius:999px;
-      padding:8px 12px; cursor:pointer; font-weight:600;
-    }
-
-    /* HERO protagonista */
+    /* HEADER / HERO */
     .hero{
       position:relative;
       overflow:hidden;
-      color:#fff;
-      padding: clamp(28px, 6vw, 80px) 24px;
       background:
-        radial-gradient(1200px 600px at 80% -10%, rgba(255,145,0,.22), transparent 60%),
-        radial-gradient(800px 400px at 0% 100%, rgba(255,97,0,.18), transparent 60%),
-        #0b0b0c;
-      /* Textura tecnológica con SVG */
-      --grid:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'><g fill='none' stroke='rgba(255,255,255,0.06)' stroke-width='1'><path d='M0 30h60M30 0v60'/><circle cx='30' cy='30' r='12'/></g></svg>");
-      background-image: var(--grid), radial-gradient(1200px 600px at 80% -10%, rgba(255,145,0,.22), transparent 60%), radial-gradient(800px 400px at 0% 100%, rgba(255,97,0,.18), transparent 60%), linear-gradient(#0b0b0c,#0b0b0c);
-      background-size: auto, cover, cover, cover;
-      background-blend-mode: overlay, normal, normal, normal;
+        radial-gradient(1200px 500px at 70% -10%, rgba(255,143,0,.16), transparent 60%),
+        radial-gradient(900px 400px at 0% 80%, rgba(255,143,0,.08), transparent 60%),
+        var(--bg-850);
+      color:var(--text);
+      padding: clamp(28px, 4vw, 40px) 24px 54px;
     }
-    .container{max-width:1120px;margin:0 auto}
+    .container{max-width:1180px;margin:0 auto}
+    .brand{display:grid;grid-template-columns:1.2fr .8fr;gap:36px;align-items:center}
+    @media (max-width:980px){.brand{grid-template-columns:1fr;gap:22px}}
 
-    .hero-grid{
-      display:grid; gap:24px; align-items:center;
-      grid-template-columns: 1.1fr .9fr;
+    /* Fondo de circuitos (SVG inline como pseudo-elemento) */
+    .hero::after{
+      content:"";
+      position:absolute; inset:0;
+      background-image: url("data:image/svg+xml;utf8,\
+      <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1600 900'>\
+        <defs>\
+          <linearGradient id='g' x1='0' x2='1' y1='0' y2='1'>\
+            <stop stop-color='%23FF8F00' stop-opacity='0.22' offset='0'/>\
+            <stop stop-color='%23FF8F00' stop-opacity='0.05' offset='1'/>\
+          </linearGradient>\
+        </defs>\
+        <g stroke='url(%23g)' stroke-width='1' fill='none' opacity='0.6'>\
+          <path d='M0 120 H1600 M0 300 H1600 M0 480 H1600 M0 660 H1600'/>\
+          <path d='M180 0 V900 M540 0 V900 M900 0 V900 M1260 0 V900'/>\
+          <circle cx='540' cy='300' r='6'/><circle cx='900' cy='480' r='6'/>\
+          <circle cx='1260' cy='660' r='6'/><circle cx='180' cy='120' r='6'/>\
+        </g>\
+      </svg>");
+      background-size: cover;
+      mix-blend-mode: screen;
+      pointer-events:none;
+      opacity:.35;
     }
-    @media (max-width:880px){ .hero-grid{ grid-template-columns:1fr; text-align:center } }
 
-    .title-wrap .kicker{
+    .badge{
       display:inline-flex;align-items:center;gap:8px;
       padding:6px 10px;border-radius:999px;
-      background: rgba(255,122,0,.1); border:1px solid rgba(255,122,0,.35);
-      font-size:12px; letter-spacing:.2px;
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.12);
+      color:var(--muted);
+      font-size:12px
     }
-    .title-wrap h1{
-      margin:12px 0 4px;
-      font-size: clamp(28px, 4vw, 48px);
-      font-weight:800;
-      letter-spacing:.2px;
+    h1{
+      margin:14px 0 6px;
+      font-size: clamp(28px, 5vw, 42px);
+      line-height:1.15;
+      text-shadow: 0 0 32px rgba(255,143,0,.18);
     }
-    .title-wrap p{ margin:0; color:#e6eaf7; max-width:56ch }
-    .micro{
-      margin-top:8px; font-size:14px; color:#ffcf9e; opacity:.9; min-height:22px;
+    .hero p{margin:0;color:var(--muted);max-width:64ch}
+    .pulse{
+      display:inline-flex;align-items:center;gap:8px;margin-top:8px;color:var(--muted-2);font-size:14px
     }
+    .dot{width:8px;height:8px;border-radius:50%;background:var(--orange);box-shadow:0 0 14px var(--orange-2), inset 0 0 8px var(--orange-2);}
 
-    .cta-row{ display:flex; gap:12px; flex-wrap:wrap; margin-top:18px }
+    .cta-row{display:flex;gap:12px;margin-top:20px;flex-wrap:wrap}
     .btn{
-      appearance:none; border:0; cursor:pointer; text-decoration:none;
-      display:inline-flex; align-items:center; gap:10px;
-      padding:12px 18px; border-radius:12px; font-weight:700;
-      color:#0b0b0c; background: var(--orange);
-      box-shadow: 0 0 0 rgba(255,122,0,0);
-      transition: transform .08s ease, box-shadow .2s ease, background .2s ease, filter .2s ease;
+      appearance:none;border:0;cursor:pointer;text-decoration:none;
+      display:inline-flex;align-items:center;justify-content:center;
+      gap:10px;padding:12px 18px;border-radius:12px;font-weight:700;
+      box-shadow:0 6px 18px rgba(0,0,0,.25); transition:transform .06s ease, filter .2s ease, box-shadow .2s ease;
+      font-size:15px;  /* unificado para todos los botones */
     }
-    .btn:hover{
-      transform: translateY(-1px);
-      background: var(--orange-2);
-      box-shadow: 0 0 24px rgba(255,122,0,.45);
-      filter: saturate(110%);
-    }
-    .btn-ghost{
-      background: transparent; color:#fff; border:1.6px solid rgba(255,255,255,.35);
-    }
-    .btn-ghost:hover{ border-color:#fff; background:rgba(255,255,255,.08) }
+    .btn:hover{transform:translateY(-1px);filter:saturate(110%); box-shadow: var(--ring);}
+    .btn:active{transform:translateY(0)}
+    .btn-primary{background:var(--orange);color:#111}
+    .btn-ghost{background:#fff;color:#111}
+    .btn-secondary{background:transparent;color:#fff;border:1.6px solid rgba(255,255,255,.38)}
 
-    /* Ilustración protagonista (flotando) */
-    .hero-figure{
-      justify-self:center; position:relative;
-      filter: drop-shadow(0 20px 40px rgba(255,122,0,.2));
-      animation: float 6s ease-in-out infinite;
-    }
-    .hero-figure img{
-      width:min(360px, 62vw); height:auto; border-radius:50%;
-      background: radial-gradient(80% 80% at 50% 30%, rgba(255,170,80,.25), transparent 60%);
-      border: 2px solid rgba(255,255,255,.08);
-    }
-    @keyframes float{
-      0%,100%{ transform: translateY(0) }
-      50%{ transform: translateY(-8px) }
+    /* Retrato Julia */
+    .portrait{
+      width:min(380px,70vw);aspect-ratio:1/1;border-radius:50%;
+      background:#0E1016 url('assets/web-app-manifest-512x512.png') center/78% no-repeat;
+      margin:0 auto; box-shadow: 0 0 0 6px rgba(255,255,255,.08), 0 0 55px rgba(255,143,0,.35);
+      outline:2px solid rgba(255,143,0,.28);
     }
 
-    /* Main */
-    main{ padding:40px 24px; background:linear-gradient(#0b0b0c,#0e0f12) }
-    .grid{ display:grid; gap:16px }
-    @media (min-width:920px){ .grid{ grid-template-columns:1.2fr .8fr } }
-
+    /* MAIN */
+    main{padding:40px 24px}
+    .grid{display:grid;grid-template-columns:1.1fr .9fr;gap:18px}
+    @media (max-width:980px){.grid{grid-template-columns:1fr}}
     .card{
-      background: var(--paper);
-      border:1px solid var(--card-br);
-      border-radius: var(--radius);
-      padding:24px; box-shadow: var(--shadow);
-      transition: transform .12s ease, box-shadow .2s ease, border-color .2s ease, background .2s ease;
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:var(--radius);
+      background: linear-gradient(180deg, var(--card), var(--bg-800));
+      box-shadow:0 14px 40px rgba(0,0,0,.25);
+      padding:24px;
     }
-    .card:hover{
-      transform: translateY(-2px);
-      box-shadow: 0 14px 40px rgba(255,122,0,.12);
-      border-color: rgba(255,122,0,.35);
-      background: linear-gradient(180deg, rgba(255,122,0,.06), transparent 60%), var(--paper);
-    }
-    h2{ margin:0 0 12px; font-size: clamp(20px,2.4vw,28px); color:#ffd4a6 }
-    ul{ margin:0; padding-left:18px }
-    li{ margin:6px 0 }
+    h2{margin:0 0 12px;font-size:clamp(20px,2.4vw,28px); text-shadow:0 0 22px rgba(255,143,0,.18)}
+    ul{margin:0;padding-left:18px}
+    li{margin:8px 0;color:var(--muted)}
     .note{
-      margin-top:14px; padding:12px; border-left:4px solid var(--orange);
-      background: rgba(255,122,0,.08); color:#ffd4a6; border-radius:8px;
+      margin-top:14px;padding:12px;border-left:4px solid var(--orange);
+      background:rgba(255,143,0,.10);color:#fff;border-radius:8px;
     }
 
-    /* Tips de Julia */
-    .tips{ display:grid; gap:10px; margin-top:8px }
-    .tip{ background: rgba(255,255,255,.04); border:1px dashed rgba(255,122,0,.4); padding:12px; border-radius:10px; color:#ffdcb8 }
-
-    /* Footer */
-    footer{
-      padding:24px; color:#9aa3b2; text-align:center; border-top:1px solid var(--card-br);
-      background: linear-gradient(180deg, #0e0f12, #0b0b0c);
+    /* Enlaces con subrayado animado */
+    a.link{
+      color:var(--text); text-decoration:none; position:relative;
     }
-    .footer-links{ display:flex; gap:18px; justify-content:center; flex-wrap:wrap; margin-top:8px }
-    .footer-links a{ color:#9aa3b2; text-decoration:none }
-    .footer-links a:hover{ color:#ffb068 }
-
-    /* Accesibilidad tipográfica en móvil */
-    @media (max-width:480px){
-      body{ font-size: 17px }
-      .btn{ padding:14px 18px }
+    a.link::after{
+      content:""; position:absolute; left:0; right:0; bottom:-2px; height:2px;
+      background:var(--orange); transform:scaleX(0); transform-origin:left; transition:transform .25s ease;
     }
+    a.link:hover::after{ transform:scaleX(1); }
+
+    /* FOOTER */
+    footer{padding:28px;color:var(--muted);text-align:center;border-top:1px solid rgba(255,255,255,.08)}
+    .footer-links{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;margin-top:8px}
+    .footer-links a{color:var(--muted);text-decoration:none}
+    .footer-links a:hover{color:var(--text)}
   </style>
 </head>
 
-<body data-theme="dark">
-  <!-- TOPBAR con logo CUN sutil + toggle de modo -->
-  <div class="topbar">
-    <div class="brand-mini">
-      <img src="assets/apple-touch-icon.png" alt="CUN" class="logo-cun" />
-      <strong>Corporación Unificada Nacional</strong>
-    </div>
-    <button class="mode-toggle" id="modeToggle" aria-label="Cambiar tema">Modo claro/oscuro</button>
-  </div>
-
-  <!-- HERO protagonista -->
+<body>
+  <!-- HERO -->
   <header class="hero">
-    <div class="container hero-grid">
-      <div class="title-wrap">
-        <span class="kicker">🧓 Julia – Asistente de Prácticas</span>
-        <h1>Tu abuelita de prácticas, lista pa’ ayudarte</h1>
+    <div class="container brand">
+      <div>
+        <span class="badge">🟠 Julia – Asistente de Prácticas</span>
+        <h1>Tu abuelita de prácticas,<br>lista pa’ ayudarte</h1>
         <p>Resuelves tus dudas de <strong>SGP</strong>, <strong>ARL</strong>, <strong>documentos</strong>, seguimiento y cierre. Con humor, cariño… y orden.</p>
-        <div class="micro" id="microstate" aria-live="polite">💬 Julia está lista para conversar…</div>
+        <div class="pulse"><span class="dot" aria-hidden="true"></span> <span>Julia está lista para conversar…</span></div>
         <div class="cta-row">
-          <a class="btn" href="https://bienestaru.cun.edu.co/practicas/?utm_source=julia&utm_medium=hero_cta&utm_campaign=sgp" target="_blank" rel="noopener">Ir al SGP</a>
-          <a class="btn btn-ghost" href="https://sites.google.com/cun.edu.co/practicascun/p%C3%A1gina-principal?utm_source=julia&utm_medium=hero_cta&utm_campaign=portal" target="_blank" rel="noopener">Portal de prácticas</a>
-          <button class="btn btn-ghost" id="btnChat">Hablar con Julia</button>
+          <a class="btn btn-primary" href="https://bienestaru.cun.edu.co/practicas/?utm_source=otilia&utm_medium=hero_cta&utm_campaign=sgp" target="_blank" rel="noopener">Ir al SGP</a>
+          <a class="btn btn-ghost" href="https://sites.google.com/cun.edu.co/practicascun/p%C3%A1gina-principal?utm_source=otilia&utm_medium=hero_cta&utm_campaign=portal" target="_blank" rel="noopener">Portal de prácticas</a>
+          <button class="btn btn-secondary" type="button" id="btnChat">Hablar con Julia</button>
         </div>
       </div>
-
-      <figure class="hero-figure">
-        <!-- Reutilizo tu icono 512 como avatar circular -->
-        <img src="assets/web-app-manifest-512x512.png" alt="Julia, abuelita digital" />
-      </figure>
+      <div class="portrait" aria-label="Ilustración de Julia"></div>
     </div>
   </header>
 
@@ -242,21 +200,13 @@
       <div class="note">Consejo: ten a la mano tu correo institucional; lo vas a necesitar para acceder a formatos y al SGP.</div>
     </section>
 
-    <aside class="card" aria-label="Accesos">
+    <aside class="card" aria-label="Accesos útiles">
       <h2>Accesos útiles</h2>
       <ul>
-        <li><a href="https://bienestaru.cun.edu.co/practicas/?utm_source=julia&utm_medium=sidebar_link&utm_campaign=sgp" target="_blank" rel="noopener">Ingreso a SGP</a></li>
-        <li><a href="https://sites.google.com/cun.edu.co/practicascun/p%C3%A1gina-principal?utm_source=julia&utm_medium=sidebar_link&utm_campaign=portal" target="_blank" rel="noopener">Portal de prácticas (Google Sites)</a></li>
+        <li><a class="link" href="https://bienestaru.cun.edu.co/practicas/?utm_source=otilia&utm_medium=sidebar_link&utm_campaign=sgp" target="_blank" rel="noopener">Ingreso a SGP</a></li>
+        <li><a class="link" href="https://sites.google.com/cun.edu.co/practicascun/p%C3%A1gina-principal?utm_source=otilia&utm_medium=sidebar_link&utm_campaign=portal" target="_blank" rel="noopener">Portal de prácticas (Google Sites)</a></li>
       </ul>
     </aside>
-
-    <!-- TIPS DE JULIA (dinámicos) -->
-    <section class="card" style="grid-column:1/-1" aria-label="Tips de Julia">
-      <h2>Tips de Julia</h2>
-      <div class="tips" id="tipsList">
-        <!-- Se llenan por JS -->
-      </div>
-    </section>
   </main>
 
   <!-- FOOTER -->
@@ -273,21 +223,22 @@
   <script>
   (function(){
     if(!window.chatbase || window.chatbase("getState")!=="initialized"){
-      window.chatbase=(...a)=>{(window.chatbase.q??=[]).push(a)};
+      window.chatbase=(...a)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(a)};
       window.chatbase=new Proxy(window.chatbase,{get(t,p){if(p==="q"){return t.q}return(...a)=>t(p,...a)}});
     }
     const onLoad=function(){
       const s=document.createElement("script");
       s.src="https://www.chatbase.co/embed.min.js";
-      s.id="sLDgiXlWpHYwWJV6DdWvp";  // tu ID
+      s.id="sLDgiXlWpHYwWJV6DdWvp";
       s.domain="www.chatbase.co";
       document.body.appendChild(s);
     };
-    if(document.readyState==="complete"){onLoad()} else {window.addEventListener("load",onLoad)}
+    if(document.readyState==="complete"){onLoad()}
+    else{window.addEventListener("load",onLoad)}
   })();
   </script>
 
-  <!-- ABRIR CHAT (sin duplicar burbujas) -->
+  <!-- Abrir chat desde botón -->
   <script>
     (function () {
       const openChat = () => {
@@ -297,71 +248,17 @@
             try { window.chatbase('toggle'); return; } catch(e){}
           }
         } catch (e) {}
-        const clickBubble = () => {
-          const b = document.querySelector('[class*="Chatbase"] button, .chatbase-bubble, [aria-label*="chat"], [class*="bubble"]');
-          if (b) b.click();
-        };
-        clickBubble();
-        setTimeout(clickBubble, 600);
+        const bubble = document.querySelector('[class*="Chatbase"] button, .chatbase-bubble, [aria-label*="chat"], [class*="bubble"]');
+        if (bubble) bubble.click();
       };
       document.getElementById('btnChat')?.addEventListener('click', openChat);
     })();
   </script>
 
-  <!-- MICRO-ESTADO, TIPS, Y MODO OSCURO -->
-  <script>
-    // Micro-estado dinámico
-    (function(){
-      const el = document.getElementById('microstate');
-      const msgs = [
-        "💬 Julia está lista para conversar…",
-        "☕ Ya serví el tintico, ¿preguntamos?",
-        "🧾 Tengo los formatos a la mano…",
-        "🕒 No dejes todo pa’ última hora, mijito."
-      ];
-      let i=0;
-      setInterval(()=>{ i=(i+1)%msgs.length; el.textContent = msgs[i]; }, 4200);
-    })();
-
-    // Tips locales (editable)
-    (function(){
-  fetch('assets/tips.json')
-    .then(r => r.json())
-    .then(data => {
-      const list = document.getElementById('tipsList');
-      const tips = data.tips.sort(()=>Math.random()-.5).slice(0,3);
-      tips.forEach(t=>{
-        const d=document.createElement('div');
-        d.className='tip';
-        d.textContent='💡 '+t;
-        list.appendChild(d);
-      });
-    })
-    .catch(()=>console.warn('No se pudieron cargar los tips'));
-})();
-
-
-    // Modo claro/oscuro
-    (function(){
-      const k='julia-theme';
-      const root=document.documentElement;
-      const btn=document.getElementById('modeToggle');
-      const saved=localStorage.getItem(k);
-      if(saved){ root.setAttribute('data-theme', saved); }
-      btn.addEventListener('click', ()=>{
-        const curr=root.getAttribute('data-theme')==='dark'?'light':'dark';
-        root.setAttribute('data-theme', curr);
-        localStorage.setItem(k, curr);
-      });
-    })();
-  </script>
-
-  <!-- SW opcional -->
+  <!-- Service Worker -->
   <script>
     if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('sw.js');
-      });
+      window.addEventListener('load', () => navigator.serviceWorker.register('sw.js'));
     }
   </script>
 </body>
