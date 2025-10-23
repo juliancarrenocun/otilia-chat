@@ -5,9 +5,9 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Julia – Asistente de Prácticas CUN</title>
 
-  <!-- Metadatos -->
-  <meta name="description" content="Tu guía para resolver dudas sobre SGP, ARL, documentos y seguimiento de prácticas en la CUN." />
-  <meta name="theme-color" content="#0C0F14" />
+  <!-- META -->
+  <meta name="description" content="Tu abuelita digital para resolver dudas sobre SGP, ARL, documentos y seguimiento de prácticas en la CUN." />
+  <meta name="theme-color" content="#0B0C0F" />
 
   <!-- Open Graph -->
   <meta property="og:title" content="Julia – Asistente de Prácticas CUN" />
@@ -19,7 +19,7 @@
   <!-- Performance (chat) -->
   <link rel="preconnect" href="https://www.chatbase.co" crossorigin>
 
-  <!-- Iconos & PWA -->
+  <!-- Icons & PWA -->
   <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
   <link rel="icon" type="image/png" sizes="96x96" href="assets/favicon-96x96.png" />
   <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png" />
@@ -28,256 +28,265 @@
   <link rel="manifest" href="assets/site.webmanifest" />
 
   <style>
-    /* =================== PALETA =================== */
     :root{
-      --bg-0:#0C0F14;          /* fondo base */
-      --bg-1:#0F141B;          /* fondo hero interno */
-      --glass:#10151C80;       /* negro 60% (para glass) */
-      --text:#E8EDF3;          /* texto principal (blanco suave) */
-      --muted:#A9B1BB;         /* texto secundario */
-      --brand:#FF8F00;         /* naranja principal */
-      --brand-2:#FFB347;       /* naranja claro */
-      --stroke:rgba(255,143,0,.28);
-      --glow:0 0 0px rgba(255,143,0,0), 0 0 22px rgba(255,143,0,.12), 0 0 40px rgba(255,143,0,.10);
+      /* Paleta naranja-negro-blanco */
+      --bg:#0B0C0F;              /* fondo base */
+      --bg-2:#0E1014;            /* fondo secciones */
+      --ink:#F5F7FA;             /* texto principal */
+      --muted:#B8C0CC;           /* texto secundario */
+      --orange:#FF8F00;          /* acento */
+      --orange-2:#FFA733;        /* hover/acento claro */
+      --card:#0E1116CC;          /* semi-glass (rgba) */
+      --card-br:#1F2430;         /* borde cards */
+      --white:#FFFFFF;
       --radius:16px;
-      --shadow:0 18px 50px rgba(0,0,0,.45);
+      --shadow:0 10px 30px rgba(0,0,0,.35);
+      --link:#F1F4F8;
     }
+
     *{box-sizing:border-box}
     html,body{margin:0}
     body{
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
-      background: radial-gradient(900px 380px at 80% 10%, rgba(255,143,0,.08) 0%, transparent 60%), var(--bg-0);
-      color:var(--text);
+      background: var(--bg);
+      color: var(--ink);
       -webkit-font-smoothing:antialiased;
       text-rendering:optimizeLegibility;
+      line-height:1.5;
     }
 
-    /* ====== FONDO TECNOLÓGICO (líneas/circuitos) ====== */
-    .tech{
-      position:fixed; inset:0; pointer-events:none; z-index:-1;
-      background:
-        radial-gradient(520px 220px at 85% 22%, rgba(255,143,0,.12), transparent 60%),
-        radial-gradient(480px 200px at 18% 86%, rgba(255,143,0,.08), transparent 60%),
-        repeating-linear-gradient(110deg, transparent 0 36px, rgba(255,255,255,.03) 36px 37px),
-        repeating-linear-gradient(20deg, transparent 0 54px, rgba(255,255,255,.02) 54px 55px);
-      mask-image: radial-gradient(1200px 600px at 60% -10%, #000 55%, transparent 80%);
+    /* TOPBAR sutil con logo */
+    .topbar{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:12px; padding:10px 20px; border-bottom:1px solid var(--card-br);
+      background: linear-gradient(90deg,#0B0C0F 0%, #121318 100%);
     }
+    .brand-mini{display:flex; align-items:center; gap:10px}
+    .brand-mini img{width:28px;height:28px;border-radius:4px;opacity:.95}
+    .brand-mini strong{font-size:14px;color:#E6EAF2}
 
-    /* =================== HERO =================== */
-    .container{max-width:1080px;margin:0 auto;padding:0 22px}
+    /* HERO con líneas tecnológicas y orbes */
     .hero{
+      position:relative; overflow:hidden; color:#fff;
+      padding: clamp(28px, 6vw, 84px) 24px;
       background:
-        radial-gradient(1200px 520px at 70% -20%, rgba(255,143,0,.12), transparent 60%),
-        var(--bg-1);
-      padding: clamp(28px, 4.5vw, 60px) 0 24px;
-      position:relative;
-      box-shadow: var(--shadow);
+        radial-gradient(1400px 700px at 85% -10%, rgba(255,143,0,.22), transparent 60%),
+        radial-gradient(900px 480px at 0% 100%, rgba(255,143,0,.14), transparent 60%),
+        #0B0C0F;
     }
-    .brand-tag{
+    /* textura de circuitos (líneas visibles) */
+    .hero::before{
+      content:""; position:absolute; inset:0;
+      background-image:
+        repeating-linear-gradient(  20deg, rgba(255,255,255,.06) 0 1px, transparent 1px 32px),
+        repeating-linear-gradient( 110deg, rgba(255,255,255,.05) 0 1px, transparent 1px 36px);
+      mask-image: radial-gradient(1200px 600px at 60% 0%, #000 45%, transparent 80%);
+      pointer-events:none;
+    }
+
+    .container{max-width:1120px;margin:0 auto}
+
+    .hero-grid{ display:grid; gap:24px; align-items:center; grid-template-columns: 1.1fr .9fr; }
+    @media (max-width:880px){ .hero-grid{ grid-template-columns:1fr; text-align:center } }
+
+    .kicker{
       display:inline-flex;align-items:center;gap:8px;
-      font-size:12px;color:#F7F9FC;
-      background:linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,.04));
-      border:1px solid rgba(255,255,255,.20);
       padding:6px 10px;border-radius:999px;
-      backdrop-filter:saturate(130%) blur(4px);
+      background: rgba(255,143,0,.12); border:1px solid rgba(255,143,0,.35);
+      font-size:12px; letter-spacing:.2px;
     }
-    .hero-wrap{display:grid;gap:24px;align-items:center}
-    @media (min-width:980px){.hero-wrap{grid-template-columns:1.2fr .8fr}}
+    .hero h1{
+      margin:12px 0 6px; font-size: clamp(28px, 4vw, 48px); font-weight:800; letter-spacing:.2px;
+    }
+    .hero p{ margin:0; color:#E9EEF7; max-width:56ch }
+    .micro{ margin-top:8px; font-size:14px; color:#FFDDB1; opacity:.95; min-height:22px }
 
-    h1{
-      margin:16px 0 10px;
-      font-size: clamp(28px, 4.8vw, 46px);
-      line-height:1.1;
-    }
-    .lead{color:var(--muted);max-width:62ch}
-
-    /* Avatar grande derecha */
-    .hero-visual{
-      display:flex;justify-content:center;align-items:center;
-    }
-    .orb{
-      width:min(360px, 58vw); aspect-ratio:1/1;
-      border-radius:50%;
-      background:
-        radial-gradient(circle at 50% 50%, rgba(255,255,255,.22) 0 2px, transparent 2px),
-        radial-gradient(120px 120px at 60% 30%, rgba(255,143,0,.28), transparent 70%),
-        #0E131A;
-      box-shadow:
-        0 0 0 8px rgba(255,255,255,.06),
-        0 0 0 14px rgba(255,143,0,.14),
-        0 20px 60px rgba(0,0,0,.45);
-      position:relative;
-    }
-    .orb img{
-      position:absolute; inset:14px; width:calc(100% - 28px); height:calc(100% - 28px);
-      object-fit:cover; border-radius:50%;
-      box-shadow: inset 0 0 40px rgba(255,143,0,.15);
-    }
-
-    /* =================== BOTONES =================== */
-    .cta-row{display:flex;gap:12px;margin-top:18px;flex-wrap:wrap}
+    .cta-row{ display:flex; gap:12px; flex-wrap:wrap; margin-top:18px }
     .btn{
-      appearance:none;border:0;cursor:pointer;text-decoration:none;
-      display:inline-flex;align-items:center;gap:10px;
-      padding:12px 18px;border-radius:12px;font-weight:700;
-      transition:transform .06s ease, filter .2s ease, box-shadow .3s ease;
-      font-size:14px;
+      appearance:none; border:0; cursor:pointer; text-decoration:none;
+      display:inline-flex; align-items:center; gap:10px;
+      padding:12px 18px; border-radius:12px; font-weight:700;
+      color:#0B0C0F; background: var(--orange);
+      box-shadow: 0 0 0 rgba(255,143,0,0);
+      transition: transform .08s ease, box-shadow .2s ease, background .2s ease, filter .2s ease;
     }
-    .btn-primary{background:var(--brand); color:#1A1100; box-shadow: 0 8px 30px rgba(255,143,0,.24)}
-    .btn-ghost   {background:rgba(255,255,255,.06); color:#fff; border:1px solid rgba(255,255,255,.2)}
-    .btn-secondary{background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04)); color:#fff; border:1px solid rgba(255,255,255,.18)}
-    .btn:hover{transform:translateY(-1px); box-shadow:0 10px 36px rgba(255,143,0,.32)}
-    /* Igualar tamaño de texto en todos los botones */
-    .btn, .btn *{font-size:14px !important}
+    .btn:hover{ transform:translateY(-1px); background:var(--orange-2); box-shadow:0 0 24px rgba(255,143,0,.45); filter:saturate(110%) }
+    .btn-ghost{
+      background: transparent; color:#fff; border:1.6px solid rgba(255,255,255,.35);
+    }
+    .btn-ghost:hover{ border-color:#fff; background:rgba(255,255,255,.08) }
 
-    /* =================== TARJETAS (GLASS) =================== */
-    main{padding:40px 0 56px}
-    .grid{display:grid;gap:16px}
-    @media (min-width:980px){.grid{grid-template-columns:1.15fr .85fr}}
+    /* Hero figura flotante con glow orbital */
+    .hero-figure{ justify-self:center; position:relative; filter: drop-shadow(0 22px 44px rgba(255,143,0,.22)); animation:float 6s ease-in-out infinite; }
+    .hero-figure img{
+      width:min(380px, 62vw); height:auto; border-radius:50%;
+      background: radial-gradient(80% 80% at 50% 30%, rgba(255,170,80,.28), transparent 60%);
+      border: 3px solid rgba(255,255,255,.1);
+      box-shadow: 0 0 0 8px rgba(255,255,255,.06), 0 0 60px rgba(255,143,0,.2) inset;
+    }
+    @keyframes float{ 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
 
+    /* ENLACES: no azules + subrayado animado */
+    a{ color: var(--link); text-decoration:none; position:relative }
+    a::after{
+      content:""; position:absolute; left:0; bottom:-2px; height:2px; width:0%;
+      background: linear-gradient(90deg, var(--orange), var(--orange-2));
+      transition: width .25s ease;
+    }
+    a:hover::after{ width:100% }
+
+    /* MAIN */
+    main{ padding:40px 24px; background:linear-gradient(#0B0C0F,#0E1115) }
+    .grid{ display:grid; gap:16px }
+    @media (min-width:920px){ .grid{ grid-template-columns:1.2fr .8fr } }
+
+    /* Cards semi-glass */
     .card{
-      position:relative;
-      background: var(--glass);
-      border:1px solid var(--stroke);
+      background: var(--card);
+      -webkit-backdrop-filter: blur(6px);
+      backdrop-filter: blur(6px);
+      border:1px solid var(--card-br);
       border-radius: var(--radius);
-      padding:22px;
-      backdrop-filter: saturate(140%) blur(10px);
-      -webkit-backdrop-filter: saturate(140%) blur(10px);
-      box-shadow: var(--glow);
-      transition: box-shadow .25s ease, transform .15s ease, border-color .2s ease;
+      padding:24px; box-shadow: var(--shadow);
+      transition: transform .12s ease, box-shadow .2s ease, border-color .2s ease, background .2s ease;
     }
     .card:hover{
-      box-shadow: 0 0 0 rgba(0,0,0,0), 0 0 30px rgba(255,143,0,.18), 0 0 64px rgba(255,143,0,.14);
-      transform: translateY(-1px);
-      border-color: rgba(255,143,0,.45);
+      transform: translateY(-2px);
+      box-shadow: 0 14px 40px rgba(255,143,0,.15);
+      border-color: rgba(255,143,0,.38);
+      background: linear-gradient(180deg, rgba(255,143,0,.06), transparent 60%), var(--card);
     }
+    h2{ margin:0 0 12px; font-size: clamp(20px,2.4vw,28px); color:#FFD9A3 }
+    ul{ margin:0; padding-left:18px }
+    li{ margin:6px 0 }
 
-    h2{margin:0 0 12px;font-size:clamp(18px,2.1vw,24px)}
-    ul{margin:0;padding-left:18px}
-    li{margin:6px 0}
     .note{
-      margin-top:14px;padding:12px;border-left:4px solid var(--brand);
-      background: linear-gradient(180deg, rgba(255,143,0,.14), rgba(255,143,0,.08));
-      color:#FFEBD1;border-radius:8px;
+      margin-top:14px; padding:12px; border-left:4px solid var(--orange);
+      background: rgba(255,143,0,.1); color:#FFD9A3; border-radius:8px;
     }
-
-    /* Enlaces visibles y subrayado animado */
-    a{color:#FFFFFF;text-decoration:none;position:relative}
-    .link-ux a::after{
-      content:""; position:absolute; left:0; right:0; bottom:-2px; height:2px;
-      background: linear-gradient(90deg, var(--brand), var(--brand-2));
-      transform:scaleX(0); transform-origin:left; transition:transform .25s ease;
-    }
-    .link-ux a:hover::after{ transform:scaleX(1) }
 
     /* Tips */
-    .tips{display:grid;gap:10px;margin-top:10px}
+    .tips{ display:grid; gap:10px; margin-top:8px }
     .tip{
-      background:rgba(255,255,255,.05); border:1px dashed rgba(255,143,0,.35);
-      color:#EDEFF3; padding:10px 12px; border-radius:10px; font-size:14px;
+      background: rgba(255,255,255,.04);
+      border:1px dashed rgba(255,143,0,.45);
+      padding:12px; border-radius:10px; color:#FFE4BF
     }
-    .tips-actions{display:flex; gap:8px; margin-top:10px}
-    .tips-actions button{font-size:12px}
+    .tips-actions{ margin-top:12px; display:flex; gap:10px }
+    .btn-mini{
+      padding:8px 12px; border-radius:10px; font-weight:700; border:1px solid rgba(255,255,255,.2);
+      background:transparent; color:#fff; cursor:pointer
+    }
+    .btn-mini:hover{ border-color:#fff; background:rgba(255,255,255,.08) }
 
     /* Footer */
-    footer{padding:24px;color:var(--muted);text-align:center;border-top:1px solid rgba(255,255,255,.06)}
-    .footer-links{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;margin-top:8px}
-    .footer-links a{color:#DDE5EE}
-    .footer-links a:hover{color:#fff}
-
-    /* Utilidades */
-    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
-    .pill{display:inline-flex;gap:8px;align-items:center;padding:6px 10px;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.18);font-size:12px;color:#EDEFF3}
+    footer{
+      padding:24px; color:#A6B0BD; text-align:center; border-top:1px solid var(--card-br);
+      background: linear-gradient(180deg, #0E1115, #0B0C0F);
+    }
+    .footer-links{ display:flex; gap:18px; justify-content:center; flex-wrap:wrap; margin-top:8px }
+    .footer-links a{ color:#A6B0BD }
+    .footer-links a:hover{ color:#FFC784 }
+    
+    /* Accesibilidad tipográfica en móvil */
+    @media (max-width:480px){
+      body{ font-size: 17px }
+      .btn{ padding:14px 18px }
+    }
   </style>
 </head>
 
 <body>
-  <div class="tech"></div>
+  <!-- TOPBAR -->
+  <div class="topbar">
+    <div class="brand-mini">
+      <img src="assets/apple-touch-icon.png" alt="CUN" />
+      <strong>Corporación Unificada Nacional</strong>
+    </div>
+  </div>
 
-  <!-- =================== HERO =================== -->
+  <!-- HERO -->
   <header class="hero">
-    <div class="container hero-wrap">
+    <div class="container hero-grid">
       <div>
-        <div class="brand-tag">🗨️ Julia – Asistente de Prácticas</div>
+        <span class="kicker">🧓 Julia – Asistente de Prácticas</span>
         <h1>Julia – tu guía para las prácticas</h1>
-        <p class="lead">Te acompaño con <strong>SGP</strong>, <strong>ARL</strong> y <strong>documentos</strong> — sin enredos. Con humor, cariño… y orden.</p>
-        <div class="pill">💬 Julia está lista para conversar…</div>
+        <p>Te acompaño con <strong>SGP</strong>, <strong>ARL</strong> y <strong>documentos</strong> — sin enredos.</p>
+        <div class="micro" id="microstate" aria-live="polite">💬 Cargando…</div>
+
         <div class="cta-row">
-          <a class="btn btn-primary" href="https://bienestaru.cun.edu.co/practicas/?utm_source=otilia&utm_medium=hero_cta&utm_campaign=sgp" target="_blank" rel="noopener">Ir al SGP</a>
-          <a class="btn btn-secondary" href="https://sites.google.com/cun.edu.co/practicascun/p%C3%A1gina-principal?utm_source=otilia&utm_medium=hero_cta&utm_campaign=portal" target="_blank" rel="noopener">Portal de prácticas</a>
-          <button class="btn btn-ghost" type="button" id="btnChat">Hablar con Julia</button>
+          <a class="btn" href="https://bienestaru.cun.edu.co/practicas/?utm_source=julia&utm_medium=hero_cta&utm_campaign=sgp" target="_blank" rel="noopener">Ir al SGP</a>
+          <a class="btn btn-ghost" href="https://sites.google.com/cun.edu.co/practicascun/p%C3%A1gina-principal?utm_source=julia&utm_medium=hero_cta&utm_campaign=portal" target="_blank" rel="noopener">Portal de prácticas</a>
+          <button class="btn btn-ghost" id="btnChat">Hablar con Julia</button>
         </div>
       </div>
 
-      <div class="hero-visual">
-        <div class="orb">
-          <img src="assets/web-app-manifest-512x512.png" alt="Ícono Julia" />
-        </div>
-      </div>
+      <figure class="hero-figure">
+        <img src="assets/web-app-manifest-512x512.png" alt="Julia, abuelita digital" />
+      </figure>
     </div>
   </header>
 
-  <!-- =================== CONTENIDO =================== -->
-  <main class="container">
-    <div class="grid">
-      <section class="card">
-        <h2>¿Qué puedes preguntarle?</h2>
-        <ul>
-          <li>¿Cómo registro mi práctica en el SGP?</li>
-          <li>¿Qué documentos necesito según mi modalidad?</li>
-          <li>¿Cuándo debo subir la carta de finalización?</li>
-          <li>¿Qué pasa si la empresa no tiene convenio?</li>
-        </ul>
-        <div class="note">Consejo: ten a la mano tu correo institucional; lo vas a necesitar para acceder a formatos y al SGP.</div>
-      </section>
+  <!-- CONTENIDO -->
+  <main class="container grid" aria-label="Contenido principal">
+    <section class="card">
+      <h2>¿Qué puedes preguntarle?</h2>
+      <ul>
+        <li>¿Cómo registro mi práctica en el SGP?</li>
+        <li>¿Qué documentos necesito según mi modalidad?</li>
+        <li>¿Cuándo debo subir la carta de finalización?</li>
+        <li>¿Qué pasa si la empresa no tiene convenio?</li>
+      </ul>
+      <div class="note">Consejo: ten a la mano tu correo institucional; lo vas a necesitar para acceder a formatos y al SGP.</div>
+    </section>
 
-      <aside class="card link-ux">
-        <h2>Accesos útiles</h2>
-        <ul>
-          <li><a href="https://bienestaru.cun.edu.co/practicas/?utm_source=otilia&utm_medium=sidebar_link&utm_campaign=sgp" target="_blank" rel="noopener">Ingreso a SGP</a></li>
-          <li><a href="https://sites.google.com/cun.edu.co/practicascun/p%C3%A1gina-principal?utm_source=otilia&utm_medium=sidebar_link&utm_campaign=portal" target="_blank" rel="noopener">Portal de prácticas (Google Sites)</a></li>
-        </ul>
+    <aside class="card" aria-label="Accesos">
+      <h2>Accesos útiles</h2>
+      <ul>
+        <li><a href="https://bienestaru.cun.edu.co/practicas/?utm_source=julia&utm_medium=sidebar_link&utm_campaign=sgp" target="_blank" rel="noopener">Ingreso a SGP</a></li>
+        <li><a href="https://sites.google.com/cun.edu.co/practicascun/p%C3%A1gina-principal?utm_source=julia&utm_medium=sidebar_link&utm_campaign=portal" target="_blank" rel="noopener">Portal de prácticas (Google Sites)</a></li>
+      </ul>
+    </aside>
 
-        <h3 style="margin:16px 0 8px;font-size:16px">✨ Tips de Julia</h3>
-        <div id="tips" class="tips" aria-live="polite"></div>
-        <div class="tips-actions">
-          <button id="btnTip" class="btn btn-primary" type="button">Actualizar tip</button>
-          <button id="btn3" class="btn btn-ghost" type="button">Ver 3 tips</button>
-        </div>
-      </aside>
-    </div>
+    <!-- TIPS DE JULIA (desde JSON) -->
+    <section class="card" style="grid-column:1/-1" aria-label="Tips de Julia">
+      <h2>Tips de Julia</h2>
+      <div class="tips" id="tipsList"></div>
+      <div class="tips-actions">
+        <button class="btn-mini" id="tipsReload">Actualizar tips</button>
+      </div>
+    </section>
   </main>
 
-  <!-- =================== FOOTER =================== -->
+  <!-- FOOTER -->
   <footer>
     <div>© 2025 CUN – Coordinación de Prácticas</div>
-    <nav class="footer-links">
+    <nav class="footer-links" aria-label="Enlaces de pie de página">
       <a href="https://www.cun.edu.co/" target="_blank" rel="noopener">Sitio CUN</a>
       <a href="https://bienestaru.cun.edu.co/practicas/" target="_blank" rel="noopener">SGP</a>
       <a href="https://sites.google.com/cun.edu.co/practicascun/p%C3%A1gina-principal" target="_blank" rel="noopener">Portal de prácticas</a>
     </nav>
   </footer>
 
-  <!-- =================== CHATBASE (SNIPPET) =================== -->
+  <!-- CHATBASE -->
   <script>
   (function(){
     if(!window.chatbase || window.chatbase("getState")!=="initialized"){
-      window.chatbase=(...a)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(a)};
+      window.chatbase=(...a)=>{(window.chatbase.q??=[]).push(a)};
       window.chatbase=new Proxy(window.chatbase,{get(t,p){if(p==="q"){return t.q}return(...a)=>t(p,...a)}});
     }
     const onLoad=function(){
       const s=document.createElement("script");
       s.src="https://www.chatbase.co/embed.min.js";
-      s.id="sLDgiXlWpHYwWJV6DdWvp";
+      s.id="sLDgiXlWpHYwWJV6DdWvp";  // tu ID
       s.domain="www.chatbase.co";
       document.body.appendChild(s);
     };
-    if(document.readyState==="complete"){onLoad()}
-    else{window.addEventListener("load",onLoad)}
+    if(document.readyState==="complete"){onLoad()} else {window.addEventListener("load",onLoad)}
   })();
   </script>
 
-  <!-- =================== ABRIR CHAT =================== -->
+  <!-- ABRIR CHAT -->
   <script>
     (function () {
       const openChat = () => {
@@ -294,54 +303,65 @@
         clickBubble();
         setTimeout(clickBubble, 600);
       };
-      const btn = document.getElementById('btnChat');
-      if (btn) btn.addEventListener('click', openChat);
+      document.getElementById('btnChat')?.addEventListener('click', openChat);
     })();
   </script>
 
-  <!-- =================== TIPS (tips.json) =================== -->
+  <!-- MICRO-ESTADO y TIPS desde JSON -->
   <script>
-    (function(){
-      const tipsBox = document.getElementById('tips');
-      const btnTip  = document.getElementById('btnTip');
-      const btn3    = document.getElementById('btn3');
+    // Utilidad: shuffle simple
+    function shuffle(arr){ return arr.map(v=>[Math.random(),v]).sort((a,b)=>a[0]-b[0]).map(x=>x[1]); }
 
-      let tips = [];
-      let last = -1;
-
-      function renderTips(items){
-        tipsBox.innerHTML = '';
-        items.forEach(t=>{
-          const div = document.createElement('div');
-          div.className = 'tip';
-          div.textContent = '• ' + t;
-          tipsBox.appendChild(div);
-        });
+    // Cargar micro-mensajes desde assets/micro.json
+    (async function loadMicro(){
+      const el = document.getElementById('microstate');
+      try{
+        const res = await fetch('assets/micro.json?v=' + Date.now());
+        const data = await res.json();
+        const msgs = Array.isArray(data.messages) ? data.messages : ["💬 Julia está lista para conversar…"];
+        const interval = Number(data.interval_ms||4200);
+        let i=0;
+        el.textContent = msgs[0] || "💬 Julia está lista para conversar…";
+        setInterval(()=>{ i=(i+1)%msgs.length; el.textContent = msgs[i]; }, interval);
+      }catch(e){
+        el.textContent = "💬 Julia está lista para conversar…";
       }
-      function nextTip(){
-        if (!tips.length) return;
-        let i;
-        do { i = Math.floor(Math.random()*tips.length); } while (i === last && tips.length > 1);
-        last = i;
-        renderTips([tips[i]]);
-      }
-      function threeTips(){
-        if (!tips.length) return;
-        const shuffled = [...tips].sort(()=>Math.random()-0.5).slice(0,3);
-        renderTips(shuffled);
-      }
-
-      fetch('assets/tips.json', {cache:'no-store'})
-        .then(r=>r.json())
-        .then(data=>{
-          tips = (data && Array.isArray(data.tips)) ? data.tips : [];
-          nextTip();
-        })
-        .catch(()=>{ tips = ["El registro en SGP debe hacerse antes de subir documentos; así evitas rechazos."]; renderTips(tips); });
-
-      if (btnTip) btnTip.addEventListener('click', nextTip);
-      if (btn3) btn3.addEventListener('click', threeTips);
     })();
+
+    // Cargar tips desde assets/tips.json
+    async function renderTips(){
+      const list = document.getElementById('tipsList');
+      list.innerHTML = "Cargando…";
+      try{
+        const res = await fetch('assets/tips.json?v=' + Date.now());
+        const data = await res.json();
+        const all = Array.isArray(data.tips) ? data.tips : [];
+        const sample = shuffle(all).slice(0,3);
+        list.innerHTML = "";
+        sample.forEach(t=>{
+          const d=document.createElement('div');
+          d.className='tip';
+          d.textContent='💡 ' + t;
+          list.appendChild(d);
+        });
+        if(sample.length===0){
+          list.innerHTML = "<div class='tip'>💡 Agrega tips en <code>assets/tips.json</code>.</div>";
+        }
+      }catch(e){
+        list.innerHTML = "<div class='tip'>No se pudieron cargar los tips. Revisa <code>assets/tips.json</code>.</div>";
+      }
+    }
+    renderTips();
+    document.getElementById('tipsReload')?.addEventListener('click', renderTips);
+  </script>
+
+  <!-- SW opcional -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('sw.js');
+      });
+    }
   </script>
 </body>
 </html>
